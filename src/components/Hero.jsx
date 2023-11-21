@@ -1,5 +1,6 @@
 import '../App.css'
 import {useState} from "react";
+import {useTypingText} from "../hooks/useTypingText.jsx";
 
 export default function Hero() {
     const [link, setLink] = useState("")
@@ -34,9 +35,12 @@ export default function Hero() {
         setShowTranscription(!showTranscription);
     };
 
+    let supportedServices = useTypingText(['TikTok', 'Instagram'], 80, 35);
+
     return (<div className={"hero p-8 min-h-screen flex items-center justify-center"}>
         <div className={"max-w-screen-lg"}>
-            <h1 className={"text-5xl font-semibold text-gray-50"}>Summarize short videos from <b>TikTok</b></h1>
+            <h1 className={"flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize short videos from <b
+                className="min-w-[250px]">{supportedServices.word}</b></h1>
             <form className={"flex mt-4 w-full md:w-90"}>
                 <input
                     className={"flex-1 py-4 px-4 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 "}
@@ -47,7 +51,13 @@ export default function Hero() {
                     onChange={handleInputChange}
                 />
                 <button
-                    className={"bg-gradient-to-r from-blue-300 to-pink-400 text-white py-4 px-8 rounded-r-full hover:from-blue-300 hover:to-pink-600 focus:outline-none focus:shadow-outline-pink active:scale-95 transition-transform duration-100 ease-in-out text-lg font-semibold disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"}
+                    className={"bg-gradient-to-r from-blue-300 to-pink-400 text-white py-4 px-8 rounded-r-full " +
+                        "hover:from-blue-300 hover:to-pink-600 focus:outline-none " +
+                        `${isValidLink ? "active:scale-[.97] " : ""}` +
+                        "transition-transform duration-75 ease-in-out focus:ring-1 focus:ring-violet-400 " +
+                        "text-lg font-semibold disabled:bg-gray-300 " +
+                        "disabled:text-gray-500 disabled:cursor-not-allowed"
+                    }
                     type={"button"}
                     disabled={!isValidLink}
                     onClick={sendRequest}
@@ -55,7 +65,8 @@ export default function Hero() {
                 </button>
             </form>
             {link && !isValidLink && (
-                <p className="bg-white text-red-500 w-60 mt-2">Please enter a valid TikTok or Instagram link.</p>)}
+                <p className="bg-white text-red-500 w-80 mt-2 p-1 rounded-lg">Please enter a valid TikTok or Instagram
+                    link.</p>)}
 
             {apiResponse.title && (
                 <div className="bg-white mt-4 p-4 rounded-xl shadow-md">

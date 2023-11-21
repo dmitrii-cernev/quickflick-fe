@@ -13,3 +13,43 @@
     filter: blur(10px); /* Adjust the blur value as needed */
     z-index: -1;
 }
+
+/*the typewriting text block*/
+.word {
+    display: block;
+}
+
+.word span {
+    position: relative;
+}
+
+.word span::after {
+    content: '';
+    width: 6px;
+    height: 90%;
+    background: white;
+    display: block;
+    position: absolute;
+    right: -12px;
+    top: 0;
+    animation: blink 0.5s linear infinite alternate-reverse;
+}
+
+@keyframes blink {
+    from {
+        opacity: 100%;
+    }
+
+    to {
+        opacity: 0%;
+    }
+}
+
+.word.empty {
+    visibility: hidden;
+}
+
+.word.empty span::after {
+    visibility: visible;
+    right: 0;
+}
