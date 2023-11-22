@@ -48,7 +48,8 @@ export default function Hero() {
 
     return (<div className={"hero p-8 min-h-screen flex items-center justify-center"}>
         <div className={"max-w-screen-lg"}>
-            <h1 className={"flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize short videos from <b
+            <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
+                short videos from <b
                 className="min-w-[250px]">{supportedServices.word}</b>
             </h1>
 

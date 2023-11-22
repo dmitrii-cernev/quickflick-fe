@@ -2,7 +2,7 @@ import * as PropTypes from "prop-types";
 
 export default function InputForm(props) {
 
-    return <form className={"flex mt-4 w-full md:w-90"}>
+    return <form className={"animate-fade-up animate-duration-700 flex mt-4 w-full md:w-90"}>
         <input
             className={"flex-1 py-4 px-4 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 "}
             type={"text"}
@@ -14,8 +14,8 @@ export default function InputForm(props) {
         <button
             className={"bg-gradient-to-r from-blue-300 to-pink-400 text-white py-4 px-8 rounded-r-full " +
                 "hover:from-blue-300 hover:to-pink-600 focus:outline-none " +
-                `${props.disabled ? "active:scale-[.97] " : ""}` +
-                "transition-transform duration-75 ease-in-out focus:ring-1 focus:ring-violet-400 " +
+                `${props.disabled ? "active:scale-[.96] " : ""}` +
+                "transition-transform duration-100 ease-in-out focus:ring-2 focus:ring-violet-400 " +
                 "text-lg font-semibold disabled:bg-gray-300 " +
                 "disabled:text-gray-500 disabled:cursor-not-allowed"
             }
