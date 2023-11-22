@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useTypingText} from "../hooks/useTypingText.jsx";
 import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 
 export default function Hero() {
@@ -11,6 +12,7 @@ export default function Hero() {
     const [apiResponse, setApiResponse] = useState({
         title: "", summary: "", transcription: ""
     });
+    const [isLoading, setIsLoading] = useState(false)
     const [showTranscription, setShowTranscription] = useState(false);
 
     function handleInputChange(event) {
@@ -24,12 +26,17 @@ export default function Hero() {
 
     const sendRequest = async () => {
         try {
+            setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            const callback = await fetch(`http://localhost:8080/process?url=${encodedLink}`);
-            const jsonResponse = await callback.json();
-            setApiResponse(jsonResponse);
+            await fetch(`http://localhost:8080/process?url=${encodedLink}`)
+                .then(response => response.json())
+                .then(response => {
+                    setApiResponse(response)
+                    setIsLoading(false)
+                })
         } catch (error) {
             console.error('Error fetching data:', error);
+            setIsLoading(false)
         }
     };
 
@@ -45,7 +52,10 @@ export default function Hero() {
                 className="min-w-[250px]">{supportedServices.word}</b>
             </h1>
 
-            <InputForm value={link} onChange={handleInputChange} validLink={isValidLink} onClick={sendRequest}/>
+            <InputForm value={link} onChange={handleInputChange} disabled={isValidLink && !isLoading}
+                       onClick={sendRequest}/>
+
+            {isLoading && <LoadingSpinner/>}
 
             {link && !isValidLink && (
                 <p className="bg-white text-red-500 w-80 mt-2 p-1 rounded-lg">Please enter a valid TikTok or Instagram

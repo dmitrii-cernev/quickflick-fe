@@ -14,13 +14,13 @@ export default function InputForm(props) {
         <button
             className={"bg-gradient-to-r from-blue-300 to-pink-400 text-white py-4 px-8 rounded-r-full " +
                 "hover:from-blue-300 hover:to-pink-600 focus:outline-none " +
-                `${props.validLink ? "active:scale-[.97] " : ""}` +
+                `${props.disabled ? "active:scale-[.97] " : ""}` +
                 "transition-transform duration-75 ease-in-out focus:ring-1 focus:ring-violet-400 " +
                 "text-lg font-semibold disabled:bg-gray-300 " +
                 "disabled:text-gray-500 disabled:cursor-not-allowed"
             }
             type={"button"}
-            disabled={!props.validLink}
+            disabled={!props.disabled}
             onClick={props.onClick}
         >Send!
         </button>
@@ -30,6 +30,6 @@ export default function InputForm(props) {
 InputForm.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
-    validLink: PropTypes.bool,
+    disabled: PropTypes.bool,
     onClick: PropTypes.func
 };
