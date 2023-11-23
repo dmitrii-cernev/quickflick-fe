@@ -18,9 +18,10 @@ export default function Hero() {
     function handleInputChange(event) {
         const value = event.target.value
         setLink(value)
-        const tiktokPattern = /^https:\/\/www\.tiktok\.com\/@[\w\d-]+\/video\/\d+(\?.*)?$/;
+        const tiktokShortPattern = /^https:\/\/vm\.tiktok\.com\/\w+\/?$/;
+        const tiktokLongPattern = /^https:\/\/(?:www\.)?tiktok\.com\/@[\w-]+\/video\/\d+\/?(\?.*)?$/;
         const instagramPattern = /^https:\/\/www\.instagram\.com\/reel\/[\w-]+(?:\/[^/?]+)?(?:[/?].*)?$/;
-        const isValidLink = tiktokPattern.test(value) || instagramPattern.test(value);
+        const isValidLink = tiktokShortPattern.test(value) || instagramPattern.test(value) || tiktokLongPattern.test(value);
         setIsValidLink(isValidLink);
     }
 
@@ -28,7 +29,8 @@ export default function Hero() {
         try {
             setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            await fetch(`3.231.164.83:8080/process?url=${encodedLink}`)
+            let host = `3.231.164.83:8080`;
+            await fetch(`${host}/process?url=${encodedLink}`)
                 .then(response => response.json())
                 .then(response => {
                     setApiResponse(response)
