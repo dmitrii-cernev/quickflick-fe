@@ -29,7 +29,7 @@ export default function Hero() {
         try {
             setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            await fetch(`https://quickflick.duckdns.org:8443/process?url=${encodedLink}`)
+            await fetch(`https://quickflick.duckdns.org/process?url=${encodedLink}`)
                 .then(response => response.json())
                 .then(response => {
                     setApiResponse(response)
