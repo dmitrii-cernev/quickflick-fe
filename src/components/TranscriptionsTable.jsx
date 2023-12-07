@@ -2,7 +2,7 @@
 const TranscriptionsTable = ({transcriptions}) => {
     return (
         <div className={"m-4 rounded-xl overflow-hidden shadow-md"}>
-            <table className="min-w-full border border-gray-300 divide-y divide-gray-300">
+            <table className="min-w-full max-w-md md:max-w-full border border-gray-300 divide-y divide-gray-300">
                 <thead>
                 <tr>
                     <th className="py-2 px-4 bg-gray-100 border-b">Title</th>
