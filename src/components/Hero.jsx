@@ -1,9 +1,10 @@
 import '../App.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useTypingText} from "../hooks/useTypingText.jsx";
 import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
 import LoadingSpinner from "./LoadingSpinner.jsx";
+import axios from "axios";
 
 
 export default function Hero() {
@@ -14,6 +15,7 @@ export default function Hero() {
     });
     const [isLoading, setIsLoading] = useState(false)
     const [showTranscription, setShowTranscription] = useState(false);
+    const [ip, setIP] = useState("")
 
     function handleInputChange(event) {
         const value = event.target.value
@@ -29,7 +31,7 @@ export default function Hero() {
         try {
             setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            await fetch(`https://quickflick.duckdns.org/process?url=${encodedLink}`)
+            await fetch(`https://quickflick.duckdns.org/process?url=${encodedLink}&user_ip=${ip}`)
                 .then(response => response.json())
                 .then(response => {
                     setApiResponse(response)
@@ -46,6 +48,15 @@ export default function Hero() {
     };
 
     let supportedServices = useTypingText(['TikTok', 'Instagram'], 80, 35);
+
+    const getData = async () => {
+        const res = await axios.get("https://api.ipify.org/?format=json");
+        setIP(res.data.ip);
+    };
+
+    useEffect(() => {
+        getData().then(() => console.log(ip));
+    }, [ip]);
 
     return (<div className={"hero p-8 min-h-screen flex items-center justify-center"}>
         <div className={"max-w-screen-lg"}>
