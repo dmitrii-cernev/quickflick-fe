@@ -9,9 +9,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('https://unbounce.com/photos/Gradient-Background.png') center/cover no-repeat;
+    /*background: url('https://unbounce.com/photos/Gradient-Background.png') center/cover no-repeat;*/
     filter: blur(10px); /* Adjust the blur value as needed */
     z-index: -1;
+    background-color: #8dace9;
+    background-image: linear-gradient(135deg, #8dace9 0%, #e79bd4 50%, #f5e4e4 100%);
 }
 
 /*the typewriting text block*/

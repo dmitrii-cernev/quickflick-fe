@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
 const TranscriptionsTable = ({transcriptions}) => {
     return (
-        <div className={"m-4 rounded-xl overflow-hidden shadow-md"}>
+        <div className={"m-4 rounded-xl overflow-hidden shadow-md animate-fade-up animate-duration-700"}>
             <table className="min-w-full max-w-md md:max-w-full border border-gray-300 divide-y divide-gray-300">
                 <thead>
                 <tr>
