@@ -35,7 +35,7 @@ export default function Hero() {
         try {
             setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            await fetch(`${host}/process?url=${encodedLink}&user_ip=${ip}`)
+            await fetch(`${host}/process?url=${encodedLink}&userIp=${ip}`)
                 .then(response => response.json())
                 .then(response => {
                     setApiResponse(response)
