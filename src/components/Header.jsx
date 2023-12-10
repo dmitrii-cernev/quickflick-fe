@@ -1,11 +1,11 @@
-import logo from "../media/logo.png"
+import logo from "../media/logo.svg"
 
 export function Header() {
     return (
-        <header className="bg-white shadow-lg p-6">
-            <div className="container mx-auto flex items-center">
-                <img src={logo} alt="QuickFlick" className="h-8 w-8 mr-4"/>
-                <h1 className="text-2xl font-semibold text-gray-800">QuickFlick</h1>
+        <header className="bg-white shadow-lg p-5">
+            <div className="container mx-auto flex items-center ml-8">
+                <img src={logo} alt="MiniMemo" className="h-10 w-10 mr-4"/>
+                <h1 className="text-2xl font-semibold text-gray-800">MiniMemo</h1>
             </div>
         </header>
     );
