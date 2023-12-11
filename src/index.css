@@ -1,0 +1,8 @@
+
+body {
+    padding: 0;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-color: #8dace9;
+    background-image: linear-gradient(135deg, #8dace9 0%, #e79bd4 50%, #f5e4e4 100%);
+}
