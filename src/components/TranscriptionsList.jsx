@@ -14,7 +14,7 @@ const TranscriptionsList = ({transcriptions}) => {
     };
 
     return (
-        <ul className="mt-4 space-y-1">
+        <ul className="mt-4 space-y-1 animate-fade-right animate-duration-500">
             {transcriptions.map((video, index) => (
                 <li key={video.id} className="bg-white p-4 rounded-xl shadow-lg max-w-md">
                     <div
@@ -29,14 +29,14 @@ const TranscriptionsList = ({transcriptions}) => {
                         >
                             {video.title}
                         </a>
-                        <span className="text-gray-500">
+                        <span className="text-gray-400">
               <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="ml-0.5 w-8 h-6"
               >
                 <path
                     strokeLinecap="round"
@@ -47,7 +47,7 @@ const TranscriptionsList = ({transcriptions}) => {
             </span>
                     </div>
                     {activeVideos[index] && (
-                        <p className="text-gray-600 mt-2 max-h-[100px] overflow-hidden">
+                        <p className="text-gray-600 mt-2 overflow-hidden">
                             {video.description}
                         </p>
                     )}
