@@ -25,7 +25,7 @@ const TranscriptionsList = ({transcriptions}) => {
                             href={video.videoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline"
+                            className="text-blue-500 hover:underline w-10/12"
                         >
                             {video.title}
                         </a>
@@ -36,7 +36,7 @@ const TranscriptionsList = ({transcriptions}) => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="ml-0.5 w-8 h-6"
+                  className="w-6 h-6"
               >
                 <path
                     strokeLinecap="round"
