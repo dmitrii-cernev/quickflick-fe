@@ -4,8 +4,8 @@ import {useTypingText} from "../hooks/useTypingText.jsx";
 import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
 import LoadingSpinner from "./LoadingSpinner.jsx";
-import TranscriptionsTable from "./TranscriptionsTable.jsx";
 import axios from "axios";
+import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 
 
 export default function Hero() {
@@ -96,9 +96,7 @@ export default function Hero() {
                     <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
                                   showTranscription={showTranscription}/>
                 )}
-                {transcriptionsRetrieved && transcriptions.length > 0 && (
-                    <TranscriptionsTable transcriptions={transcriptions}/>
-                )}
+                <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved} transcriptions={transcriptions}/>
             </div>
         </div>)
 }
