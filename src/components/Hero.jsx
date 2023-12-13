@@ -27,7 +27,8 @@ export default function Hero() {
         const tiktokShortPattern = /^https:\/\/vm\.tiktok\.com\/\w+\/?$/;
         const tiktokLongPattern = /^https:\/\/(?:www\.)?tiktok\.com\/@[\w-]+\/video\/\d+\/?(\?.*)?$/;
         const instagramPattern = /^https:\/\/www\.instagram\.com\/reel\/[\w-]+(?:\/[^/?]+)?(?:[/?].*)?$/;
-        const isValidLink = tiktokShortPattern.test(value) || instagramPattern.test(value) || tiktokLongPattern.test(value);
+        const youtubePattern = /^(https?:\/\/)?(www\.)?youtube\.com\/shorts\/[a-zA-Z0-9_-]+(\?.*)?$/;
+        const isValidLink = tiktokShortPattern.test(value) || instagramPattern.test(value) || tiktokLongPattern.test(value) || youtubePattern.test(value);
         setIsValidLink(isValidLink);
     }
 
@@ -51,7 +52,7 @@ export default function Hero() {
         setShowTranscription(!showTranscription);
     };
 
-    let supportedServices = useTypingText(['TikTok', 'Instagram'], 80, 35);
+    let supportedServices = useTypingText(['TikTok', 'Instagram', 'Shorts'], 80, 35);
 
     const getIP = async () => {
         const res = await axios.get("https://api.ipify.org/?format=json");
@@ -88,9 +89,9 @@ export default function Hero() {
                 {isLoading && <LoadingSpinner/>}
 
                 {link && !isValidLink && (
-                    <p className="bg-white text-red-500 w-80 mt-2 p-1 rounded-lg">Please enter a valid TikTok or
+                    <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a valid TikTok,
                         Instagram
-                        link.</p>)}
+                        or Youtube Shorts link.</p>)}
 
                 {apiResponse.title && (
                     <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
