@@ -32,16 +32,31 @@ export default function Hero() {
         setIsValidLink(isValidLink);
     }
 
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const pollTranscription = async (videoId) => {
+        try {
+            console.log(`Polling for video ${videoId}...`)
+            const transcription = await axios.get(`${host}/video/${videoId}`)
+            if (transcription.data.title && transcription.data.title.trim() !== "") {
+                setApiResponse(transcription.data)
+                setIsLoading(false)
+            } else {
+                await delay(1500)
+                await pollTranscription(videoId)
+            }
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setIsLoading(false)
+        }
+    }
     const sendRequest = async () => {
         try {
             setIsLoading(true)
             const encodedLink = encodeURIComponent(link)
-            await fetch(`${host}/process?url=${encodedLink}&userIp=${ip}`)
-                .then(response => response.json())
-                .then(response => {
-                    setApiResponse(response)
-                    setIsLoading(false)
-                })
+            const videoId = await axios.post(`${host}/process?url=${encodedLink}&userId=${ip}`);
+            await console.log(videoId.data)
+            await pollTranscription(videoId.data)
         } catch (error) {
             console.error('Error fetching data:', error);
             setIsLoading(false)
@@ -63,7 +78,7 @@ export default function Hero() {
         getIP().then(async () => {
             console.log(ip);
             if (!transcriptionsRetrieved) {
-                await fetch(`${host}/get/${ip}`)
+                await fetch(`${host}/videos/${ip}`)
                     .then(response => response.json())
                     .then(response => {
                         console.log(response)

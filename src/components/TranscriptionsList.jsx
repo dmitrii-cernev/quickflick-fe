@@ -48,7 +48,7 @@ const TranscriptionsList = ({transcriptions}) => {
                     </div>
                     {activeVideos[index] && (
                         <p className="text-gray-600 mt-2 overflow-hidden">
-                            {video.description}
+                            {video.summary}
                         </p>
                     )}
                 </li>

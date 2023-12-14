@@ -17,7 +17,7 @@ const TranscriptionsTable = ({transcriptions}) => {
                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                         <td className="py-2 px-4 border-b">{transcription.title}</td>
                         <td className="py-2 px-4 border-b">{transcription.platform}</td>
-                        <td className="py-2 px-4 border-b">{transcription.description}</td>
+                        <td className="py-2 px-4 border-b">{transcription.summary}</td>
                         <td className="py-2 px-4 border-b">
                             <a
                                 href={transcription.videoUrl}
