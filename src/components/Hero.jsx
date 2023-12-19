@@ -91,7 +91,7 @@ export default function Hero() {
 
 
     return (
-        <div className={"p-8 min-h-screen flex items-center justify-center"}>
+        <div className={"text-left p-8 min-h-screen flex items-center justify-center"}>
             <div className={"max-w-screen-lg flex flex-col items-center justify-center"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b

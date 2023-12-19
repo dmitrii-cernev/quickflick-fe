@@ -1,11 +1,15 @@
 import {Header} from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
+import FooterWithLogo from "./components/FooterWithLogo.jsx";
 
 export default function App() {
     return (
-        <main className="flex flex-col items-center justify-center space-y-28 h-full">
+        <main className="text-center">
             <Header/>
-            <Hero/>
+            <div className={"mx-auto my-16 sm:my-28"}>
+                <Hero/>
+            </div>
+            <FooterWithLogo/>
         </main>
     );
 
