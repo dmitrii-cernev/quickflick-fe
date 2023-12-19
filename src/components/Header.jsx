@@ -4,25 +4,29 @@ import {Button, Menu, MenuHandler, MenuItem, MenuList} from "@material-tailwind/
 export function Header() {
     return (
         <header
-            className="bg-white shadow-lg p-2 pl-4 sm:p-3.5 sm:pl-8 top-0 fixed w-full z-20 bg-opacity-[0.96] backdrop-blur-[2px]">
+            className="bg-white shadow-lg p-2 pl-4 sm:p-3.5 sm:pl-8 top-0 fixed w-full z-20 bg-opacity-[0.94] backdrop-blur-[2px]">
             <div className={"max-w-screen-xl flex items-center justify-between mx-auto px-3 sm:px-1"}>
                 <div className="container flex items-center w-auto">
                     <img src={logo} alt="MiniMemo" className="h-7 sm:h-10 mr-1 sm:mr-3"/>
                     <h1 className="text-[1.35rem] sm:text-[1.7rem] font-semibold text-gray-800">MiniMemo</h1>
                 </div>
-                <div className="w-auto text-lg mr-24 hidden md:flex">
+                <div className="w-auto text-lg mr-24 hidden md:flex ">
                     <ul className={"flex items-center space-x-10"}>
                         <li className={"inline-block mr-2 sm:mr-4"}>
-                            <a href="#" className=" text-gray-500 hover:text-gray-800">Home</a>
+                            <a href="#"
+                               className=" text-gray-500 transition-all duration-75 hover:text-gray-800 hover:border-b-2">Home</a>
                         </li>
                         <li className={"inline-block mr-2 sm:mr-4"}>
-                            <a href="#" className="text-gray-500 hover:text-gray-800">About</a>
+                            <a href="#"
+                               className="text-gray-500 transition-all duration-75 hover:text-gray-800 hover:border-b-2">About</a>
                         </li>
                         <li className={"inline-block mr-2 sm:mr-4"}>
-                            <a href="#" className="text-gray-500 hover:text-gray-800">API</a>
+                            <a href="#"
+                               className="text-gray-500 transition-all duration-75 hover:text-gray-800 hover:border-b-2">API</a>
                         </li>
                         <li className={"inline-block mr-2 sm:mr-4"}>
-                            <a href="#" className="text-gray-500 hover:text-gray-800">Pricing</a>
+                            <a href="#"
+                               className="text-gray-500 transition-all duration-75 hover:text-gray-800 hover:border-b-2">Pricing</a>
                         </li>
                     </ul>
                 </div>
@@ -44,7 +48,7 @@ export function Header() {
                                 </svg>
                             </Button>
                         </MenuHandler>
-                        <MenuList className={"w-full h-auto space-y-3 text-lg md:hidden"}>
+                        <MenuList className={"w-full p-2 rounded-b-2xl space-y-3 text-lg md:hidden"}>
                             <MenuItem><a href="#" className="text-gray-500">Home</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">About</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">API</a></MenuItem>

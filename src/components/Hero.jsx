@@ -67,7 +67,7 @@ export default function Hero() {
         setShowTranscription(!showTranscription);
     };
 
-    let supportedServices = useTypingText(['TikTok', 'Instagram', 'Shorts'], 80, 35);
+    let supportedServices = useTypingText(['TikTok', 'Instagram', 'Shorts'], 80, 50);
 
     const getIP = async () => {
         const res = await axios.get("https://api.ipify.org/?format=json");
