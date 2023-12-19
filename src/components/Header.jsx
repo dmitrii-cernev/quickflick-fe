@@ -28,14 +28,14 @@ export function Header() {
                 </div>
                 <div className={""}>
                     <button
-                        className="hidden md:flex bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base sm:text-lg font-semibold py-1 md:py-2 px-5 rounded-full inline-flex items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
+                        className="hidden md:flex bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base sm:text-lg font-semibold py-1 md:py-2 px-5 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
                         <span>Sign In</span>
                     </button>
                 </div>
                 <div className={"md:hidden"}>
                     <Menu>
                         <MenuHandler>
-                            <Button className="p-1 shadow-sm">
+                            <Button className="p-1 shadow-sm bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" data-slot="icon"
                                      className="w-6 h-6 text-gray-500">
@@ -44,7 +44,7 @@ export function Header() {
                                 </svg>
                             </Button>
                         </MenuHandler>
-                        <MenuList className={"w-full h-auto space-y-3 text-lg"}>
+                        <MenuList className={"w-full h-auto space-y-3 text-lg md:hidden"}>
                             <MenuItem><a href="#" className="text-gray-500">Home</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">About</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">API</a></MenuItem>
