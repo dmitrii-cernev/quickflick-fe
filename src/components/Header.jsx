@@ -5,7 +5,7 @@ export function Header() {
     return (
         <header
             className="bg-white shadow-lg p-2 pl-4 sm:p-3.5 sm:pl-8 top-0 fixed w-full z-20 bg-opacity-[0.96] backdrop-blur-[2px]">
-            <div className={"max-w-screen-xl flex items-center justify-between mx-auto"}>
+            <div className={"max-w-screen-xl flex items-center justify-between mx-auto px-3 sm:px-1"}>
                 <div className="container flex items-center w-auto">
                     <img src={logo} alt="MiniMemo" className="h-7 sm:h-10 mr-1 sm:mr-3"/>
                     <h1 className="text-[1.35rem] sm:text-[1.7rem] font-semibold text-gray-800">MiniMemo</h1>
@@ -44,7 +44,7 @@ export function Header() {
                                 </svg>
                             </Button>
                         </MenuHandler>
-                        <MenuList className={"w-full space-y-3 text-lg"}>
+                        <MenuList className={"w-full h-auto space-y-3 text-lg"}>
                             <MenuItem><a href="#" className="text-gray-500">Home</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">About</a></MenuItem>
                             <MenuItem><a href="#" className="text-gray-500">API</a></MenuItem>
