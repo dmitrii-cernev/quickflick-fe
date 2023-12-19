@@ -3,9 +3,9 @@ import {useEffect, useState} from "react";
 import {useTypingText} from "../hooks/useTypingText.jsx";
 import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
-import LoadingSpinner from "./LoadingSpinner.jsx";
 import axios from "axios";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
+import ResponseShowSkeleton from "./ResponseShowSkeleton.jsx";
 
 
 export default function Hero() {
@@ -92,7 +92,7 @@ export default function Hero() {
 
     return (
         <div className={"p-8 min-h-screen flex items-center justify-center"}>
-            <div className={"max-w-screen-lg"}>
+            <div className={"max-w-screen-lg flex flex-col items-center justify-center"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b
                         className="min-w-[250px]">{supportedServices.word}</b>
@@ -101,7 +101,7 @@ export default function Hero() {
                 <InputForm value={link} onChange={handleInputChange} disabled={isValidLink && !isLoading}
                            onClick={sendRequest}/>
 
-                {isLoading && <LoadingSpinner/>}
+                {isLoading && <ResponseShowSkeleton/>}
 
                 {link && !isValidLink && (
                     <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a valid TikTok,

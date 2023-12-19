@@ -1,7 +1,7 @@
 import * as PropTypes from "prop-types";
 
 export default function ResponseShow(props) {
-    return <div className="animate-fade-down animate-duration-500 bg-white mt-4 p-4 rounded-xl shadow-md max-w-4xl">
+    return <div className="animate-fade-down animate-duration-500 bg-white mt-4 p-4 rounded-xl shadow-md w-full">
         <h2 className="text-xl font-semibold text-gray-800">{props.apiResponse.title}</h2>
         <p className="text-gray-600">{props.apiResponse.summary}</p>
         <button
