@@ -3,9 +3,10 @@ import Hero from "./components/Hero.jsx";
 
 export default function App() {
     return (
-        <main className={"container space-y-20"}>
+        <main className="flex flex-col items-center justify-center space-y-20 h-full">
             <Header/>
             <Hero/>
         </main>
-    )
+    );
+
 }
