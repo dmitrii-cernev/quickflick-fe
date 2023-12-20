@@ -5,8 +5,7 @@ import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
 import axios from "axios";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
-import ResponseShowSkeleton from "./ResponseShowSkeleton.jsx";
-
+import ProgressBarDemo from "./ProgressBarDemo.jsx";
 
 export default function Hero() {
     const host = "https://quickflick.duckdns.org"
@@ -53,6 +52,7 @@ export default function Hero() {
     const sendRequest = async () => {
         try {
             setIsLoading(true)
+            setApiResponse({title: "", summary: "", transcription: ""})
             const encodedLink = encodeURIComponent(link)
             const videoId = await axios.post(`${host}/process?url=${encodedLink}&userId=${ip}`);
             await console.log(videoId.data)
@@ -91,17 +91,17 @@ export default function Hero() {
 
 
     return (
-        <div className={"text-left p-8 min-h-screen flex items-center justify-center"}>
+        <div className={"scale-75 xs:scale-100 text-left p-8 min-h-screen flex items-center justify-center"}>
             <div className={"max-w-screen-lg flex flex-col items-center justify-center"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b
-                        className="min-w-[250px]">{supportedServices.word}</b>
+                        className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
                 </h1>
 
                 <InputForm value={link} onChange={handleInputChange} disabled={isValidLink && !isLoading}
                            onClick={sendRequest}/>
 
-                {isLoading && <ResponseShowSkeleton/>}
+                {isLoading && <ProgressBarDemo/>}
 
                 {link && !isValidLink && (
                     <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a valid TikTok,

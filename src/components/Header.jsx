@@ -6,7 +6,7 @@ export function Header() {
         <header
             className="bg-white shadow-lg p-2 pl-4 sm:p-3.5 sm:pl-8 top-0 fixed w-full z-20 bg-opacity-[0.94] backdrop-blur-[2px]">
             <div className={"max-w-screen-xl flex items-center justify-between mx-auto px-3 sm:px-1"}>
-                <div className="container flex items-center w-auto">
+                <div className="container flex items-center w-auto min-w-fit mr-4">
                     <img src={logo} alt="MiniMemo" className="h-7 sm:h-10 mr-1 sm:mr-3"/>
                     <h1 className="text-[1.35rem] sm:text-[1.7rem] font-semibold text-gray-800">MiniMemo</h1>
                 </div>
@@ -32,7 +32,7 @@ export function Header() {
                 </div>
                 <div className={""}>
                     <button
-                        className="hidden md:flex bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base sm:text-lg font-semibold py-1 md:py-2 px-5 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
+                        className="hidden md:flex bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base md:text-lg font-semibold py-1 md:py-2 px-5 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
                         <span>Sign In</span>
                     </button>
                 </div>
