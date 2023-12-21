@@ -81,7 +81,6 @@ export default function Hero() {
                 await fetch(`${host}/videos/${ip}`)
                     .then(response => response.json())
                     .then(response => {
-                        console.log(response)
                         setTranscriptions(response)
                         setTranscriptionsRetrieved(true)
                     })
