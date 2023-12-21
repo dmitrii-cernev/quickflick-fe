@@ -1,11 +1,11 @@
-import {Typography} from "@material-tailwind/react";
+import {Footer, FooterCopyright} from "flowbite-react";
 
 export default function FooterWithLogo() {
     return (
-        <footer className="w-full bg-white p-6 bg-opacity-30">
-            <Typography color="blue-gray" className="text-center font-normal">
-                &copy; 2023 MiniMemo
-            </Typography>
-        </footer>
+        <Footer className={"p-6 bg-opacity-30"} container>
+            <div className={"w-full text-center"}>
+                <FooterCopyright href="#" by="MiniMemo™" year={2023}/>
+            </div>
+        </Footer>
     );
 }

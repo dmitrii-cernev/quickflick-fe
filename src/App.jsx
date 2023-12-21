@@ -1,6 +1,6 @@
-import {Header} from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import FooterWithLogo from "./components/FooterWithLogo.jsx";
+import Header from "./components/Header.jsx";
 
 export default function App() {
     return (
