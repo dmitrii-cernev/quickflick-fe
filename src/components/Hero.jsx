@@ -8,7 +8,7 @@ import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 import ProgressBarDemo from "./ProgressBarDemo.jsx";
 
 export default function Hero() {
-    const host = "https://back.minimemo.store"
+    const host = "https://minimemo.store"
     const [link, setLink] = useState("")
     const [isValidLink, setIsValidLink] = useState(false);
     const [apiResponse, setApiResponse] = useState({
