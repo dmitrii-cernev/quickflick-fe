@@ -6,6 +6,7 @@ import ResponseShow from "./ResponseShow.jsx";
 import axios from "axios";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 import ProgressBarDemo from "./ProgressBarDemo.jsx";
+import {toast} from "react-toastify";
 
 export default function Hero() {
     const host = "https://minimemo.store"
@@ -19,6 +20,8 @@ export default function Hero() {
     const [transcriptions, setTranscriptions] = useState([]);
     const [transcriptionsRetrieved, setTranscriptionsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
+
+    const notifyError = () => toast.error("Oops! Something went wrong!", {position: "top-right"});
 
     function handleInputChange(event) {
         const value = event.target.value
@@ -47,6 +50,7 @@ export default function Hero() {
         } catch (error) {
             console.error('Error fetching data:', error);
             setIsLoading(false)
+            notifyError()
         }
     }
     const sendRequest = async () => {
@@ -60,6 +64,7 @@ export default function Hero() {
         } catch (error) {
             console.error('Error fetching data:', error);
             setIsLoading(false)
+            notifyError()
         }
     };
 
