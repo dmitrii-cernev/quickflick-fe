@@ -1,6 +1,6 @@
 export default function About() {
     return (<div
-        className="w-11/12 mx-auto container text-left mb-6 min-h-screen bg-white bg-opacity-80 p-8 sm:p-20 rounded-xl">
+        className="w-11/12 mx-auto container text-left mb-6 min-h-screen bg-white bg-opacity-80 p-8 sm:p-20 rounded-xl animate-fade animate-duration-200">
         <h1 className="text-4xl font-bold mb-4">About Us</h1>
 
         <div className="m-1 sm:m-6 p-2 sm:p-6 rounded-md shadow-md">
