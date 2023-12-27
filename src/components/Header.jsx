@@ -1,6 +1,7 @@
 import logo from "../media/logo.svg"
-import {Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle} from "flowbite-react";
+import {Navbar, NavbarBrand, NavbarCollapse, NavbarToggle} from "flowbite-react";
 import {Link} from "react-router-dom";
+import AppNavLink from "./AppNavLink.jsx";
 
 export default function Header() {
     return (
@@ -18,22 +19,22 @@ export default function Header() {
                 <NavbarToggle/>
             </div>
             <NavbarCollapse className={"transition-all"}>
-                <NavbarLink href={"/"}
-                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}>
-                    Home
-                </NavbarLink>
-                <NavbarLink href={"/about"}
-                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}>
-                    About
-                </NavbarLink>
-                <NavbarLink href={"/api"}
-                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}>
-                    API
-                </NavbarLink>
-                <NavbarLink href={"pricing"}
-                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}>
-                    Pricing
-                </NavbarLink>
+                <AppNavLink to={"/"}
+                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
+                            text={"Home"}
+                />
+                <AppNavLink to={"/about"}
+                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
+                            text={"About"}
+                />
+                <AppNavLink to={"/api"}
+                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
+                            text={"API"}
+                />
+                <AppNavLink to={"/pricing"}
+                            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
+                            text={"Pricing"}
+                />
             </NavbarCollapse>
         </Navbar>)
 }
