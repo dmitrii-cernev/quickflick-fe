@@ -7,6 +7,7 @@ import {Route, Routes} from "react-router-dom";
 import About from "./pages/About.jsx";
 import ApiPage from "./pages/ApiPage.jsx";
 import PricingPage from "./pages/PricingPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 export default function App() {
     const contextClass = {
@@ -27,6 +28,7 @@ export default function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/api" element={<ApiPage/>}/>
                 <Route path="/pricing" element={<PricingPage/>}/>
+                <Route path={"/login"} element={<LoginPage/>}/>
                 <Route path="*" element={<h1 className={"min-h-screen"}>Not Found</h1>}/>
             </Routes>
             <FooterWithLogo/>

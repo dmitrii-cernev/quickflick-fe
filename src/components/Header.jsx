@@ -1,5 +1,6 @@
 import logo from "../media/logo.svg"
 import {Navbar, NavbarBrand, NavbarCollapse, NavbarLink, NavbarToggle} from "flowbite-react";
+import {Link} from "react-router-dom";
 
 export default function Header() {
     return (
@@ -12,7 +13,7 @@ export default function Header() {
             <div className={"flex items-center md:order-2"}>
                 <button
                     className="transition-all bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base md:text-xl font-semibold py-1 md:py-2 px-5 mr-4 md:mr-1 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
-                    <span>Sign In</span>
+                    <Link to={"/login"}>Sign In</Link>
                 </button>
                 <NavbarToggle/>
             </div>
