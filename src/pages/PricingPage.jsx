@@ -1,9 +1,9 @@
 export default function PricingPage() {
     return (
-        <div
-            className="w-11/12 mx-auto container text-left mb-6 min-h-screen bg-white bg-opacity-40 p-10 sm:p-20 rounded-xl animate-fade animate-duration-200">
-            <h1 className="text-4xl font-bold mb-4">Pricing</h1>
-            <p className="text-lg font-semibold mb-2">Plans are currently in development.</p>
+        <div className={"h-screen max-w-7xl mx-auto "}>
+            <stripe-pricing-table pricing-table-id="prctbl_1OT98WBq28w2VvMbInH1XoBv"
+                                  publishable-key="pk_test_51OPnjdBq28w2VvMbhSAPND44VH7xWP5QF6FmqpnZ7YXDvvN2ehpuSdMqwOx5Ck3IECJQzhCGQAgI9amzRMIgjKhr00kTAY78mA">
+            </stripe-pricing-table>
         </div>
     )
 }
