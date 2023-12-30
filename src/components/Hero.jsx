@@ -6,7 +6,7 @@ import ResponseShow from "./ResponseShow.jsx";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 import ProgressBarDemo from "./ProgressBarDemo.jsx";
 import {toast} from "react-toastify";
-import {request} from "../util/axios_util.jsx";
+import {isLogged, request} from "../util/axios_util.jsx";
 import axios from "axios";
 
 export default function Hero() {
@@ -58,7 +58,8 @@ export default function Hero() {
             setIsLoading(true)
             setApiResponse({title: "", summary: "", transcription: ""})
             const encodedLink = encodeURIComponent(link)
-            const videoId = await request('POST', `/api/open/process?url=${encodedLink}&userId=${ip}`, {})
+            const url = isLogged() ? `/api/auth/process?url=${encodedLink}` : `/api/open/process?url=${encodedLink}&userId=${ip}`;
+            const videoId = await request('POST', url, {})
             await console.log(videoId.data)
             await pollTranscription(videoId.data)
         } catch (error) {
@@ -92,11 +93,17 @@ export default function Hero() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const ipAddress = await getIP();
-                console.log(ipAddress);
+                let url
+                if (isLogged()) {
+                    url = `api/auth/videos`
+                } else {
+                    const ipAddress = await getIP();
+                    console.log(ipAddress);
+                    url = `api/open/videos/${ipAddress}`
+                }
 
                 if (!transcriptionsRetrieved) {
-                    const response = await request('GET', `api/open/videos/${ipAddress}`, {})
+                    const response = await request('GET', url, {})
                     setTranscriptions(response.data);
                     setTranscriptionsRetrieved(true);
                 }

@@ -1,5 +1,7 @@
 import {useState} from 'react';
 import {FloatingLabel} from "flowbite-react";
+import {request, setAuthToken} from "../util/axios_util.jsx";
+import {toast} from "react-toastify";
 
 const RegistrationPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -13,12 +15,23 @@ const RegistrationPage = () => {
         return (firstName.trim() !== '' && lastName.trim() !== '' && email.trim() !== '' && password.trim() !== '' && confirmPassword.trim() === password.trim());
     };
 
-    const handleRegister = () => {
-        // Implement your registration logic here
+    const handleRegister = async () => {
         if (isFormValid()) {
-            console.log('Registration successful');
-            setRegistrationError('');
-            // Add logic to proceed with registration
+            setAuthToken(null)
+            try {
+                const register = await request('POST', '/register', {
+                    firstName: firstName,
+                    lastName: lastName,
+                    login: email,
+                    password: password
+                })
+                await setAuthToken(register.data.token)
+                console.log('Registration successful');
+                setRegistrationError('');
+                window.location.href = "/"
+            } catch (e) {
+                toast.warning("User already exists!")
+            }
         } else {
             setRegistrationError('Please fill in all fields correctly.');
         }
@@ -70,7 +83,7 @@ const RegistrationPage = () => {
                     type="button"
                     onClick={handleRegister}
                     disabled={!isFormValid()}
-                    className={`mx-auto w-80 text-lg text-white py-2 font-semibold bg-gradient-to-r from-blue-300 to-pink-400 
+                    className={`mx-auto p-4 text-lg text-white py-2 font-semibold bg-gradient-to-r from-blue-300 to-pink-400 
                         ${!isFormValid() && 'opacity-50 cursor-not-allowed'} 
                         hover:from-blue-300 hover:to-pink-600 focus:outline-none rounded-full`}
                 >
