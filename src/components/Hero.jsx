@@ -3,13 +3,13 @@ import {useEffect, useState} from "react";
 import {useTypingText} from "../hooks/useTypingText.jsx";
 import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
-import axios from "axios";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 import ProgressBarDemo from "./ProgressBarDemo.jsx";
 import {toast} from "react-toastify";
+import {request} from "../util/axios_util.jsx";
+import axios from "axios";
 
 export default function Hero() {
-    const host = "https://minimemo.store"
     const [link, setLink] = useState("")
     const [isValidLink, setIsValidLink] = useState(false);
     const [apiResponse, setApiResponse] = useState({
@@ -39,7 +39,7 @@ export default function Hero() {
     const pollTranscription = async (videoId) => {
         try {
             console.log(`Polling for video ${videoId}...`)
-            const transcription = await axios.get(`${host}/video/${videoId}`)
+            const transcription = await request('GET', `api/open/video/${videoId}`, {})
             if (transcription.data.title && transcription.data.title.trim() !== "") {
                 setApiResponse(transcription.data)
                 setIsLoading(false)
@@ -58,7 +58,7 @@ export default function Hero() {
             setIsLoading(true)
             setApiResponse({title: "", summary: "", transcription: ""})
             const encodedLink = encodeURIComponent(link)
-            const videoId = await axios.post(`${host}/process?url=${encodedLink}&userId=${ip}`);
+            const videoId = await request('POST', `/api/open/process?url=${encodedLink}&userId=${ip}`, {})
             await console.log(videoId.data)
             await pollTranscription(videoId.data)
         } catch (error) {
@@ -75,40 +75,61 @@ export default function Hero() {
     let supportedServices = useTypingText(['TikTok', 'Instagram', 'Shorts'], 80, 50);
 
     const getIP = async () => {
-        const res = await axios.get("https://api.ipify.org/?format=json");
-        setIP(res.data.ip);
+        try {
+            const ping = await request('GET', `/api/open/ping`, {})
+            console.log(ping.data)
+            const res = await axios.get("https://api.ipify.org/?format=json");
+            const ipAddress = res.data.ip;
+            setIP(ipAddress);
+            return ipAddress;
+        } catch (error) {
+            console.error('An error occurred while getting IP:', error);
+            notifyError();
+            throw error;
+        }
     };
 
     useEffect(() => {
-        getIP().then(async () => {
-            console.log(ip);
-            if (!transcriptionsRetrieved) {
-                await fetch(`${host}/videos/${ip}`)
-                    .then(response => response.json())
-                    .then(response => {
-                        setTranscriptions(response)
-                        setTranscriptionsRetrieved(true)
-                    })
-            }
-        });
-    }, [ip, transcriptionsRetrieved, transcriptions]);
+        const fetchData = async () => {
+            try {
+                const ipAddress = await getIP();
+                console.log(ipAddress);
 
+                if (!transcriptionsRetrieved) {
+                    const response = await request('GET', `api/open/videos/${ipAddress}`, {})
+                    setTranscriptions(response.data);
+                    setTranscriptionsRetrieved(true);
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+                notifyError();
+            }
+        };
+
+        if (!ip) {
+            fetchData();
+        }
+
+    }, [ip, transcriptionsRetrieved]);
 
     return (
-        <div className={"scale-75 xs:scale-100 text-left p-8 min-h-screen flex items-center justify-center"}>
+        <div
+            className={"scale-75 xs:scale-100 text-left p-8 min-h-screen flex items-center justify-center"}>
             <div className={"max-w-screen-lg flex flex-col items-center justify-center"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b
                         className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
                 </h1>
 
-                <InputForm value={link} onChange={handleInputChange} disabled={isValidLink && !isLoading}
+                <InputForm value={link} onChange={handleInputChange}
+                           disabled={isValidLink && !isLoading}
                            onClick={sendRequest}/>
 
                 {isLoading && <ProgressBarDemo/>}
 
                 {link && !isValidLink && (
-                    <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a valid TikTok,
+                    <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a
+                        valid TikTok,
                         Instagram
                         or Youtube Shorts link.</p>)}
 
@@ -116,7 +137,8 @@ export default function Hero() {
                     <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
                                   showTranscription={showTranscription}/>
                 )}
-                <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved} transcriptions={transcriptions}/>
+                <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved}
+                                    transcriptions={transcriptions}/>
             </div>
         </div>)
 }

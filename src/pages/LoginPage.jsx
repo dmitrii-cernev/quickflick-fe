@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, FloatingLabel} from "flowbite-react";
+import {request, setAuthToken} from "../util/axios_util.jsx";
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -10,9 +11,15 @@ const LoginPage = () => {
         return username !== '' && password !== '';
     };
 
-    const handleLogin = () => {
-        // Implement your login logic here
-        console.log('Login button clicked');
+    const handleLogin = async () => {
+        setAuthToken(null)
+        const login = await request('POST', '/login', {
+            login: username,
+            password: password
+        })
+        await setAuthToken(login.data.token);
+        console.log('Logged in!');
+        window.location.href = "/"
     };
 
     return (<div
