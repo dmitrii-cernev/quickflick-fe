@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, FloatingLabel} from "flowbite-react";
 import {request, setAuthToken} from "../util/axios_util.jsx";
+import {toast} from "react-toastify";
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -13,13 +14,18 @@ const LoginPage = () => {
 
     const handleLogin = async () => {
         setAuthToken(null)
-        const login = await request('POST', '/login', {
-            login: username,
-            password: password
-        })
-        await setAuthToken(login.data.token);
-        console.log('Logged in!');
-        window.location.href = "/"
+        try {
+            const login = await request('POST', '/login', {
+                login: username,
+                password: password
+            })
+            if (login.status === 200)
+                await setAuthToken(login.data.token);
+            console.log('Logged in!');
+            window.location.href = "/";
+        } catch (e) {
+            toast.warning("Wrong login or password")
+        }
     };
 
     return (<div
