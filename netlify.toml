@@ -2,7 +2,3 @@
 from = "/*"
 to = "/"
 status = 200
-
-[[headers]]
-[headers.values]
-X-Robots-Tag = "all"
