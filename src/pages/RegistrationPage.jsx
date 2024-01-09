@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {FloatingLabel} from "flowbite-react";
-import {request, setAuthToken} from "../util/axios_util.jsx";
+import {request, setAuthToken, setRefreshToken} from "../util/axios_util.jsx";
 import {toast} from "react-toastify";
 
 const RegistrationPage = () => {
@@ -18,14 +18,16 @@ const RegistrationPage = () => {
     const handleRegister = async () => {
         if (isFormValid()) {
             setAuthToken(null)
+            setRefreshToken(null)
             try {
-                const register = await request('POST', '/register', {
+                const register = await request('POST', '/auth/register', {
                     firstName: firstName,
                     lastName: lastName,
                     login: email,
                     password: password
                 })
                 await setAuthToken(register.data.token)
+                await setRefreshToken(register.data.refreshToken)
                 console.log('Registration successful');
                 setRegistrationError('');
                 window.location.href = "/"

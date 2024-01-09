@@ -5,9 +5,9 @@ import InputForm from "./InputForm.jsx";
 import ResponseShow from "./ResponseShow.jsx";
 import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
 import ProgressBarDemo from "./ProgressBarDemo.jsx";
-import {toast} from "react-toastify";
 import {isLogged, request} from "../util/axios_util.jsx";
 import axios from "axios";
+import {notifyDefaultError} from "../util/toast_util.jsx";
 
 export default function Hero() {
     const [link, setLink] = useState("")
@@ -20,8 +20,6 @@ export default function Hero() {
     const [transcriptions, setTranscriptions] = useState([]);
     const [transcriptionsRetrieved, setTranscriptionsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
-
-    const notifyError = () => toast.error("Oops! Something went wrong!", {position: "top-right"});
 
     function handleInputChange(event) {
         const value = event.target.value
@@ -50,7 +48,7 @@ export default function Hero() {
         } catch (error) {
             console.error('Error fetching data:', error);
             setIsLoading(false)
-            notifyError()
+            notifyDefaultError()
         }
     }
     const sendRequest = async () => {
@@ -65,7 +63,7 @@ export default function Hero() {
         } catch (error) {
             console.error('Error fetching data:', error);
             setIsLoading(false)
-            notifyError()
+            notifyDefaultError()
         }
     };
 
@@ -85,7 +83,7 @@ export default function Hero() {
             return ipAddress;
         } catch (error) {
             console.error('An error occurred while getting IP:', error);
-            notifyError();
+            notifyDefaultError();
             throw error;
         }
     };
@@ -109,7 +107,7 @@ export default function Hero() {
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
-                notifyError();
+                notifyDefaultError();
             }
         };
 

@@ -1,8 +1,9 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Button, FloatingLabel} from "flowbite-react";
-import {request, setAuthToken} from "../util/axios_util.jsx";
+import {request, setAuthToken, setRefreshToken} from "../util/axios_util.jsx";
 import {toast} from "react-toastify";
+import {notifyDefaultError} from "../util/toast_util.jsx";
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -14,17 +15,24 @@ const LoginPage = () => {
 
     const handleLogin = async () => {
         setAuthToken(null)
+        setRefreshToken(null)
         try {
-            const login = await request('POST', '/login', {
+            const login = await request('POST', '/auth/login', {
                 login: username,
                 password: password
             })
-            if (login.status === 200)
+            if (login.status === 200) {
                 await setAuthToken(login.data.token);
+                await setRefreshToken(login.data.refreshToken);
+            }
             console.log('Logged in!');
             window.location.href = "/";
         } catch (e) {
-            toast.warning("Wrong login or password")
+            console.log(e)
+            if (e.response && e.response['status'] === 404)
+                toast.warning("Wrong login or password")
+            else
+                notifyDefaultError()
         }
     };
 
