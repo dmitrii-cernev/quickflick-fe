@@ -44,7 +44,7 @@ const LoginPage = () => {
 
             <form className="flex flex-col gap-y-4 my-4 text-left items-center justify-between">
                 <FloatingLabel variant={"standard"}
-                               label={"Username"}
+                               label={"Email"}
                                value={username}
                                onChange={(e) => setUsername(e.target.value)}
                                className={"xs:w-72 sm:w-96"}

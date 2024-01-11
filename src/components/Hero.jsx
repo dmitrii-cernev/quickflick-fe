@@ -107,7 +107,6 @@ export default function Hero() {
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
-                notifyDefaultError();
             }
         };
 

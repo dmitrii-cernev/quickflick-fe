@@ -28,6 +28,7 @@ export const isLogged = () => {
 
 export const logout = () => {
     setAuthToken(null)
+    setRefreshToken(null)
 }
 
 export const isTokenExpired = () => {
@@ -41,7 +42,8 @@ export const isTokenExpired = () => {
 
 function refreshToken() {
     axios.post("/auth/refresh", {
-            refreshToken: getRefreshToken()
+        refreshToken: getRefreshToken(),
+        accessToken: getAuthToken()
         }
     ).then((response) => {
         console.log(response);

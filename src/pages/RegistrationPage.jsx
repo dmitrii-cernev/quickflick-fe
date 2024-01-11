@@ -12,7 +12,16 @@ const RegistrationPage = () => {
     const [registrationError, setRegistrationError] = useState('');
 
     const isFormValid = () => {
-        return (firstName.trim() !== '' && lastName.trim() !== '' && email.trim() !== '' && password.trim() !== '' && confirmPassword.trim() === password.trim());
+        return (firstName.trim() !== '' && lastName.trim() !== '' && email.trim() !== '' && password.trim() !== '' && arePasswordsMatching() && isEmailValid(email));
+    };
+
+    const arePasswordsMatching = () => {
+        return password.trim() === confirmPassword.trim();
+    };
+
+    const isEmailValid = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     };
 
     const handleRegister = async () => {
@@ -41,7 +50,7 @@ const RegistrationPage = () => {
 
     return (<div
         className="flex justify-center items-center h-screen sm:bg-gray-100 sm:bg-opacity-40 w-11/12 m-4 mx-auto rounded-xl animate-fade animate-duration-200">
-        <div className="sm:w-5/12 bg-white p-8 sm:px-12 rounded-lg shadow-md bg-opacity-40">
+        <div className="w-9/12 sm:w-6/12 bg-white p-8 sm:px-12 rounded-lg shadow-md bg-opacity-40">
             <h1 className="text-2xl font-bold mb-6">Register</h1>
 
             {registrationError && <p className="text-red-500 mb-4">{registrationError}</p>}
@@ -65,6 +74,7 @@ const RegistrationPage = () => {
                                value={email}
                                onChange={(e) => setEmail(e.target.value)}
                                className={""}
+                               color={email.trim() === "" || isEmailValid(email) ? undefined : "error"}
                 />
                 <FloatingLabel variant={"standard"}
                                label={"Password"}
@@ -80,7 +90,8 @@ const RegistrationPage = () => {
                                className={""}
                                type={"password"}
                 />
-
+                {!arePasswordsMatching() &&
+                    <p className="text-sm text-red-500">Passwords do not match.</p>}
                 <button
                     type="button"
                     onClick={handleRegister}
