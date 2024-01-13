@@ -8,6 +8,8 @@ import ProgressBarDemo from "./ProgressBarDemo.jsx";
 import {isLogged, request} from "../util/axios_util.jsx";
 import axios from "axios";
 import {notifyDefaultError} from "../util/toast_util.jsx";
+import {toast} from "react-toastify";
+import CountShow from "./CountShow.jsx";
 
 export default function Hero() {
     const [link, setLink] = useState("")
@@ -20,6 +22,10 @@ export default function Hero() {
     const [transcriptions, setTranscriptions] = useState([]);
     const [transcriptionsRetrieved, setTranscriptionsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
+    const [count, setCount] = useState({
+        totalCount: 0,
+        count: 0
+    });
 
     function handleInputChange(event) {
         const value = event.target.value
@@ -51,9 +57,19 @@ export default function Hero() {
             notifyDefaultError()
         }
     }
+
+    async function decrementCount() {
+        //     decrement count by 1, if bigger than 0
+        if (count.count > 0) {
+            const newCount = count.count - 1;
+            setCount({...count, count: newCount})
+        }
+    }
+
     const sendRequest = async () => {
         try {
             setIsLoading(true)
+            await decrementCount()
             setApiResponse({title: "", summary: "", transcription: ""})
             const encodedLink = encodeURIComponent(link)
             const url = isLogged() ? `/api/auth/process?url=${encodedLink}` : `/api/open/process?url=${encodedLink}&userId=${ip}`;
@@ -62,8 +78,12 @@ export default function Hero() {
             await pollTranscription(videoId.data)
         } catch (error) {
             console.error('Error fetching data:', error);
+            if (error.response && error.response.status === 400 && error.response.data.message === "No calls left") {
+                toast.warning("You have reached the maximum number of calls. Upgrade your plan to continue using the service.")
+            } else {
+                notifyDefaultError()
+            }
             setIsLoading(false)
-            notifyDefaultError()
         }
     };
 
@@ -91,20 +111,25 @@ export default function Hero() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let url
+                let getVideosUrl;
+                let getCountUrl;
                 if (isLogged()) {
-                    url = `api/auth/videos`
+                    getVideosUrl = `api/auth/videos`
+                    getCountUrl = `api/subscription/count`
                 } else {
                     const ipAddress = await getIP();
-                    console.log(ipAddress);
-                    url = `api/open/videos/${ipAddress}`
+                    getVideosUrl = `api/open/videos/${ipAddress}`
+                    getCountUrl = `api/open/subscription/count/${ipAddress}`
                 }
 
                 if (!transcriptionsRetrieved) {
-                    const response = await request('GET', url, {})
+                    const response = await request('GET', getVideosUrl, {})
                     setTranscriptions(response.data);
                     setTranscriptionsRetrieved(true);
                 }
+                const countResponse = await request('GET', getCountUrl, {})
+                setCount(countResponse.data);
+                console.log(countResponse.data)
             } catch (error) {
                 console.error('An error occurred:', error);
             }
@@ -128,6 +153,8 @@ export default function Hero() {
                 <InputForm value={link} onChange={handleInputChange}
                            disabled={isValidLink && !isLoading}
                            onClick={sendRequest}/>
+
+                <CountShow count={count}/>
 
                 {isLoading && <ProgressBarDemo/>}
 

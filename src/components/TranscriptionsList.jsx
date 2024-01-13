@@ -16,7 +16,7 @@ const TranscriptionsList = ({transcriptions}) => {
     return (
         <ul className="mt-4 space-y-1 animate-fade-right animate-duration-500">
             {transcriptions.map((video, index) => (
-                <li key={video.id} className="bg-white p-4 rounded-xl shadow-lg max-w-md">
+                <li key={video.subId} className="bg-white p-4 rounded-xl shadow-lg max-w-md">
                     <div
                         className="flex items-center justify-between cursor-pointer"
                         onClick={() => toggleDescription(index)}

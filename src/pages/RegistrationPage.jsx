@@ -50,7 +50,7 @@ const RegistrationPage = () => {
 
     return (<div
         className="flex justify-center items-center h-screen sm:bg-gray-100 sm:bg-opacity-40 w-11/12 m-4 mx-auto rounded-xl animate-fade animate-duration-200">
-        <div className="w-9/12 sm:w-6/12 bg-white p-8 sm:px-12 rounded-lg shadow-md bg-opacity-40">
+        <div className="w-10/12 sm:w-6/12 bg-white p-6 sm:px-12 rounded-lg shadow-md bg-opacity-40">
             <h1 className="text-2xl font-bold mb-6">Register</h1>
 
             {registrationError && <p className="text-red-500 mb-4">{registrationError}</p>}

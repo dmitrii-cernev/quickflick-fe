@@ -5,6 +5,10 @@ import {request, setAuthToken, setRefreshToken} from "../util/axios_util.jsx";
 import {toast} from "react-toastify";
 import {notifyDefaultError} from "../util/toast_util.jsx";
 
+function notifyWarning() {
+    toast.warning("Wrong login or password")
+}
+
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -29,10 +33,19 @@ const LoginPage = () => {
             window.location.href = "/";
         } catch (e) {
             console.log(e)
-            if (e.response && e.response['status'] === 404)
-                toast.warning("Wrong login or password")
-            else
-                notifyDefaultError()
+            switch (e.response['status']) {
+                case 401:
+                    notifyWarning();
+                    break;
+                case 404:
+                    notifyWarning();
+                    break;
+                case 400:
+                    notifyWarning();
+                    break;
+                default:
+                    notifyDefaultError()
+            }
         }
     };
 
@@ -53,6 +66,11 @@ const LoginPage = () => {
                                type={"password"}
                                value={password}
                                onChange={(e) => setPassword(e.target.value)}
+                               onKeyPress={(e) => {
+                                   if (e.key === 'Enter') {
+                                       handleLogin()
+                                   }
+                               }}
                                className={"xs:w-72 sm:w-96"}
                 />
 
