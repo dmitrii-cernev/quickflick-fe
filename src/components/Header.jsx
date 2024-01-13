@@ -2,7 +2,7 @@ import logo from "../media/logo.svg"
 import {Navbar, NavbarBrand, NavbarCollapse, NavbarToggle} from "flowbite-react";
 import {Link} from "react-router-dom";
 import AppNavLink from "./AppNavLink.jsx";
-import {isLogged, logout} from "../util/axios_util.jsx";
+import {isLogged} from "../util/axios_util.jsx";
 
 export default function Header() {
     function SignInButton() {
@@ -10,14 +10,6 @@ export default function Header() {
             {!isLogged() && <button
                 className="transition-all bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base md:text-xl font-semibold py-1 md:py-2 px-5 mr-4 md:mr-1 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
                 <Link to={"/login"}>Sign In</Link>
-            </button>}
-            {isLogged() && <button className={"text-gray-400 hover:text-gray-600"}
-                                   onClick={event => {
-                                       logout();
-                                       window.location.href = "/"
-                                   }}
-            >
-                Log Out
             </button>}
             <NavbarToggle/>
         </div>;
@@ -47,6 +39,10 @@ export default function Header() {
                         className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
                         text={"Pricing"}
             />
+            {isLogged() && <AppNavLink to={"/cabinet"}
+                                       className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
+                                       text={"Cabinet"}
+            />}
         </NavbarCollapse>
     </Navbar>)
 }

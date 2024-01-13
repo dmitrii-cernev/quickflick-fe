@@ -9,6 +9,7 @@ import ApiPage from "./pages/ApiPage.jsx";
 import PricingPage from "./pages/PricingPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegistrationPage from "./pages/RegistrationPage.jsx";
+import CustomerPortal from "./pages/CustomerPortal.jsx";
 
 export default function App() {
     const contextClass = {
@@ -31,6 +32,7 @@ export default function App() {
                 <Route path="/pricing" element={<PricingPage/>}/>
                 <Route path={"/login"} element={<LoginPage/>}/>
                 <Route path={"/register"} element={<RegistrationPage/>}/>
+                <Route path={"/cabinet"} element={<CustomerPortal/>}/>
                 <Route path="*" element={<h1 className={"min-h-screen"}>Not Found</h1>}/>
             </Routes>
             <FooterWithLogo/>
