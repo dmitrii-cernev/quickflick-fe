@@ -10,18 +10,45 @@ export class TranscriptionsShow extends Component {
                 <div>
                     {/* Render TranscriptionsList on small screens */}
                     <div className="sm:hidden">
-                        <TranscriptionsList transcriptions={this.props.transcriptions}/>
+                        <TranscriptionsList
+                            transcriptions={handleTranscription(this.props.transcriptions)}/>
                     </div>
 
                     {/* Render TranscriptionsTable on medium and larger screens */}
                     <div className="hidden sm:block">
-                        <TranscriptionsTable transcriptions={this.props.transcriptions}/>
+                        <TranscriptionsTable
+                            transcriptions={handleTranscription(this.props.transcriptions)}/>
                     </div>
                 </div>
             )}
         </div>;
     }
 }
+
+const handleTranscription = (transcriptions) => {
+    const sortedTranscriptions = transcriptions.sort((a, b) => {
+        return b.createdAt - a.createdAt;
+    });
+    return sortedTranscriptions.map((transcription) => {
+        const {status} = transcription;
+
+        if (status === 'ERROR') {
+            return {
+                ...transcription,
+                title: 'Error',
+                summary: 'Transcription error. Please try again later.',
+            };
+        } else if (status === 'PROCESSING' || status === 'TOO_LONG') {
+            return {
+                ...transcription,
+                title: 'Processing...',
+                summary: 'This video is still in process...',
+            };
+        }
+
+        return transcription;
+    });
+};
 
 TranscriptionsShow.propTypes = {
     transcriptionsRetrieved: PropTypes.bool,
