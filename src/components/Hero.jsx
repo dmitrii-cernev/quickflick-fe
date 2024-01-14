@@ -99,6 +99,8 @@ export default function Hero() {
             console.error('Error fetching data:', error);
             if (error.response && error.response.status === 400 && error.response.data.message === "No calls left") {
                 notifyExceededLimit();
+            } else if (error.response && error.response.status === 408) {
+                toast.warning("Video is too long. Come back later for results.")
             } else {
                 notifyDefaultError()
             }
