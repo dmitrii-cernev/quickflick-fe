@@ -2,11 +2,11 @@ import {Label, Modal, Sidebar, TextInput} from "flowbite-react";
 import {IoMdInformationCircleOutline} from "react-icons/io";
 import {MdOutlinePayment} from "react-icons/md";
 import {CiLogout} from "react-icons/ci";
-import {useState} from "react";
-import {logout} from "../util/axios_util.jsx";
+import {useEffect, useState} from "react";
+import {logout, request} from "../util/axios_util.jsx";
 
 
-function renderView(view) {
+function renderView(view, userInfo) {
     function billingView() {
         return (
             <div>
@@ -23,23 +23,31 @@ function renderView(view) {
         );
     }
 
-    function defaultView() {
-        return (
-            <div
-                className={"h-96 w-1/2 p-4 flex flex-col items-center justify-center mx-auto bg-white bg-opacity-40 rounded-xl animate-fade animate-duration-75"}>
-                <p className={"text-4xl font-bold"}>Welcome</p>
-            </div>
-        );
-    }
-
     function infoView() {
         return (
             <div
                 className={" p-4 flex flex-col items-start justify-center mx-auto animate-fade animate-duration-75"}>
                 <Label value={"Name:"}/>
-                <TextInput value={"John Doe"} disabled={true}/>
+                <TextInput
+                    className={"w-full"}
+                    value={userInfo.firstName + " " + userInfo.lastName}
+                    disabled={true}
+                />
                 <Label value={"Email:"}/>
-                <TextInput value={"email@gmail.com"} disabled={true}/>
+                <TextInput
+                    className={"w-full"}
+                    value={userInfo.login}
+                    disabled={true}
+                />
+            </div>
+        );
+    }
+
+    function defaultView() {
+        return (
+            <div
+                className={"h-96 w-1/2 p-4 flex flex-col items-center justify-center mx-auto bg-white bg-opacity-40 rounded-xl animate-fade animate-duration-75"}>
+                <p className={"text-4xl font-bold"}>Welcome</p>
             </div>
         );
     }
@@ -56,7 +64,17 @@ function renderView(view) {
 
 export default function CustomerPortal() {
     const [view, setView] = useState("info");
+    const [userInfo, setUserInfo] = useState({
+        firstName: "",
+        lastName: "",
+        login: ""
+    });
     const [openModal, setOpenModal] = useState(false);
+    useEffect(() => async () => {
+        const response = await request("GET", "/api/auth/user", {})
+        setUserInfo(response.data)
+        console.log(response.data)
+    }, []);
 
     return (
         <div className={"h-screen"}>
@@ -116,7 +134,7 @@ export default function CustomerPortal() {
                 </Modal>
                 <div
                     className={" p-4 m-auto bg-white bg-opacity-40 rounded-xl animate-fade animate-duration-75"}>
-                    {renderView(view)}
+                    {renderView(view, userInfo)}
                 </div>
             </div>
         </div>

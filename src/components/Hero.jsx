@@ -23,8 +23,8 @@ export default function Hero() {
     const [transcriptionsRetrieved, setTranscriptionsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
     const [count, setCount] = useState({
-        totalCount: 0,
-        count: 0
+        totalCount: 3,
+        count: 3
     });
 
     function handleInputChange(event) {
@@ -66,6 +66,25 @@ export default function Hero() {
         }
     }
 
+    function notifyExceededLimit() {
+        // toast.warning("You have reached the maximum number of calls. Upgrade your plan to continue using the service.")
+        toast.warning(<div>
+            You have reached the maximum number of calls.
+            {isLogged() ? " Upgrade your plan to continue using the service." : ""}
+            {isLogged() &&
+                <div>
+                    <button
+                        className="text-white bg-violet-500 py-1 px-2 focus:outline-none hover:bg-violet-600 rounded-2xl"
+                        onClick={() => window.location.href = "/pricing"}>Upgrade
+                    </button>
+                </div>}
+            {!isLogged() && <button
+                className="ml-2 text-white bg-violet-500 py-1 px-2 focus:outline-none hover:bg-violet-600 rounded-2xl"
+                onClick={() => window.location.href = "/register"}>Sign Up
+            </button>}
+        </div>)
+    }
+
     const sendRequest = async () => {
         try {
             setIsLoading(true)
@@ -79,7 +98,7 @@ export default function Hero() {
         } catch (error) {
             console.error('Error fetching data:', error);
             if (error.response && error.response.status === 400 && error.response.data.message === "No calls left") {
-                toast.warning("You have reached the maximum number of calls. Upgrade your plan to continue using the service.")
+                notifyExceededLimit();
             } else {
                 notifyDefaultError()
             }
@@ -124,6 +143,7 @@ export default function Hero() {
 
                 if (!transcriptionsRetrieved) {
                     const response = await request('GET', getVideosUrl, {})
+                    console.log(response.data)
                     setTranscriptions(response.data);
                     setTranscriptionsRetrieved(true);
                 }
