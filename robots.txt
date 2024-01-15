@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /$
+Disallow: /404
+Disallow: /404.html
+Disallow: /500
+Disallow: /500.html
+Disallow: /static/
+Disallow: /images/
+Disallow: /scripts/
+Disallow: /styles/
+Disallow: /assets/
+Disallow: /admin/
