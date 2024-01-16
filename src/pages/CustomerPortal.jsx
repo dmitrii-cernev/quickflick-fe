@@ -13,7 +13,7 @@ function billingView() {
             <button
                 className={"bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 m-4 rounded-3xl"}
                 onClick={event => {
-                    window.open("https://billing.stripe.com/p/login/test_aEU5np4OycGb4z6fYY", "_blank")
+                    window.open("https://billing.stripe.com/p/login/7sI9CE7ong5PfpS4gg", "_blank")
                 }}
             >
                 Open
@@ -43,7 +43,6 @@ function infoView(userInfo) {
 }
 
 export default function CustomerPortal() {
-    const [view, setView] = useState("info");
     const [userInfo, setUserInfo] = useState({
         firstName: "",
         lastName: "",
