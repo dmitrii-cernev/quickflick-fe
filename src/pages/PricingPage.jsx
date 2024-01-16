@@ -1,8 +1,11 @@
 export default function PricingPage() {
     return (
         <div className={"h-screen max-w-7xl mx-auto "}>
-            <stripe-pricing-table pricing-table-id="prctbl_1OT98WBq28w2VvMbInH1XoBv"
-                                  publishable-key="pk_test_51OPnjdBq28w2VvMbhSAPND44VH7xWP5QF6FmqpnZ7YXDvvN2ehpuSdMqwOx5Ck3IECJQzhCGQAgI9amzRMIgjKhr00kTAY78mA">
+            <span
+                className={""}><b>Note</b>: use the same email you provided during registration.</span>
+            <br/>
+            <stripe-pricing-table pricing-table-id="prctbl_1OZFokBq28w2VvMb1xdOkH1r"
+                                  publishable-key="pk_live_51OPnjdBq28w2VvMbbghUdz6Dtyb81nCfCDI6EvWrxLNL8Oh2IcMgUAb1VkanhZS9aEY98OzJukgM80Dq5TIKSzKK00O71wYDEb">
             </stripe-pricing-table>
         </div>
     )

@@ -32,7 +32,7 @@ const RegistrationPage = () => {
                 const register = await request('POST', '/auth/register', {
                     firstName: firstName,
                     lastName: lastName,
-                    login: email,
+                    login: email.toLowerCase(),
                     password: password
                 })
                 await setAuthToken(register.data.token)

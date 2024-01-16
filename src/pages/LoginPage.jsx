@@ -22,7 +22,7 @@ const LoginPage = () => {
         setRefreshToken(null)
         try {
             const login = await request('POST', '/auth/login', {
-                login: username,
+                login: username.toLowerCase(),
                 password: password
             })
             if (login.status === 200) {

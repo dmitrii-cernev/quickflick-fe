@@ -31,10 +31,10 @@ export default function Header() {
                         className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
                         text={"About"}
             />
-            <AppNavLink to={"/api"}
-                        className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
-                        text={"API"}
-            />
+            {/*<AppNavLink to={"/api"}*/}
+            {/*            className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}*/}
+            {/*            text={"API"}*/}
+            {/*/>*/}
             <AppNavLink to={"/pricing"}
                         className={"mx-2 lg:mx-6  text-xl font-normal text-gray-500 transition-all duration-75 hover:!text-gray-800 hover:shadow-[0_3px_2px_-2px_lightgray]"}
                         text={"Pricing"}
