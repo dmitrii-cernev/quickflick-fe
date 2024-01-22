@@ -2,7 +2,7 @@ import * as PropTypes from "prop-types";
 
 export default function InputForm(props) {
 
-    return <form className={"animate-fade-up animate-duration-700 flex mt-4 w-full md:w-90"}>
+    return <form className={"animate-fade-up animate-duration-700 flex mt-4 sm:w-full"}>
         <input
             className={"flex-1 py-4 px-4 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 "}
             type={"text"}
