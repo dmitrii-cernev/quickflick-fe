@@ -62,18 +62,24 @@ const LoginPage = () => {
                                onChange={(e) => setUsername(e.target.value)}
                                className={"xs:w-72 sm:w-96"}
                 />
-                <FloatingLabel variant={"standard"} label={"Password"}
-                               type={"password"}
-                               value={password}
-                               onChange={(e) => setPassword(e.target.value)}
-                               onKeyPress={(e) => {
-                                   if (e.key === 'Enter') {
-                                       handleLogin()
-                                   }
-                               }}
-                               className={"xs:w-72 sm:w-96"}
+                <div>
+                    <FloatingLabel variant={"standard"} label={"Password"}
+                                   type={"password"}
+                                   value={password}
+                                   onChange={(e) => setPassword(e.target.value)}
+                                   onKeyPress={(e) => {
+                                       if (e.key === 'Enter') {
+                                           handleLogin()
+                                       }
+                                   }}
+                                   className={"xs:w-72 sm:w-96"}
                 />
-
+                    <span className="m-2 text-xs text-blue-400 hover:underline cursor-pointer"
+                          onClick={() => {
+                              toast.warning("Please contact support to reset your password")
+                          }}
+                    >Forgot password?</span>
+                </div>
                 <Button
                     pill
                     size={"lg"}

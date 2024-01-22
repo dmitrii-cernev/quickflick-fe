@@ -48,25 +48,27 @@ export default function CustomerPortal() {
         lastName: "",
         login: ""
     });
-    const [openModal, setOpenModal] = useState(false);
+    const [openLogoutModal, setOpenLogoutModal] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await request("GET", "/api/auth/user", {});
                 setUserInfo(response.data);
-                console.log(response.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
         };
 
-        fetchData();
+        fetchData().then(() => {
+            console.log("Fetched user data");
+        });
     }, []);
 
 
     return (
         <div className={"h-screen"}>
-            <div className={"h-auto flex items-center justify-center"}>
+            <div
+                className={"h-auto flex items-center justify-center bg-white bg-opacity-40 p-4 md:w-1/2 mx-auto rounded-2xl"}>
                 <Tabs>
                     <Tabs.Item title={"Info"} icon={IoMdInformationCircleOutline} active>
                         {infoView(userInfo)}
@@ -78,7 +80,7 @@ export default function CustomerPortal() {
                         <button
                             className={"bg-violet-500 font-bold py-2 px-4 m-4 text-gray-100 rounded-full hover:bg-violet-700"}
                             onClick={event => {
-                                setOpenModal(true)
+                                setOpenLogoutModal(true)
                             }}
                         >
                             Log out
@@ -86,7 +88,7 @@ export default function CustomerPortal() {
                     </Tabs.Item>
 
                 </Tabs>
-                <Modal show={openModal} onClose={() => setOpenModal(false)}>
+                <Modal show={openLogoutModal} onClose={() => setOpenLogoutModal(false)}>
                     <Modal.Header>
                         <p className={"text-2xl font-bold"}>Logout</p>
                     </Modal.Header>
@@ -105,7 +107,7 @@ export default function CustomerPortal() {
                             <button
                                 className={"font-bold py-2 px-4 m-4 text-gray-700 hover:underline"}
                                 onClick={event => {
-                                    setOpenModal(false)
+                                    setOpenLogoutModal(false)
                                 }}
                             >
                                 No

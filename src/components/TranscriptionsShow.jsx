@@ -5,7 +5,7 @@ import * as PropTypes from "prop-types";
 
 export class TranscriptionsShow extends Component {
     render() {
-        return <div>
+        return <div className={"w-full"}>
             {this.props.transcriptionsRetrieved && this.props.transcriptions.length > 0 && (
                 <div>
                     {/* Render TranscriptionsList on small screens */}

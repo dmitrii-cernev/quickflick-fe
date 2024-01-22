@@ -59,9 +59,16 @@ export default function Hero() {
     }
 
     async function decrementCount() {
-        //     decrement count by 1, if bigger than 0
         if (count.count > 0) {
             const newCount = count.count - 1;
+            setCount({...count, count: newCount})
+        }
+    }
+
+    async function incrementCount() {
+        //idk why it works
+        if (count.count < count.totalCount) {
+            const newCount = count.count;
             setCount({...count, count: newCount})
         }
     }
@@ -105,6 +112,7 @@ export default function Hero() {
                 notifyDefaultError()
             }
             setIsLoading(false)
+            await incrementCount()
         }
     };
 
@@ -145,27 +153,25 @@ export default function Hero() {
 
                 if (!transcriptionsRetrieved) {
                     const response = await request('GET', getVideosUrl, {})
-                    console.log(response.data)
                     setTranscriptions(response.data);
                     setTranscriptionsRetrieved(true);
                 }
                 const countResponse = await request('GET', getCountUrl, {})
                 setCount(countResponse.data);
-                console.log(countResponse.data)
             } catch (error) {
                 console.error('An error occurred:', error);
             }
         };
 
-        if (!ip) {
-            fetchData();
+        if (!ip && !transcriptionsRetrieved) {
+            fetchData().then(() => console.log("Fetched data"));
         }
 
     }, [ip, transcriptionsRetrieved]);
 
     return (
         <div
-            className={"scale-75 xs:scale-100 text-left p-8 min-h-screen flex items-center justify-center"}>
+            className={"scale-75 xs:scale-100 text-left p-8 min-h-screen sm:flex items-center justify-center"}>
             <div className={"max-w-screen-lg flex flex-col items-center justify-center"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b

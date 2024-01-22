@@ -14,7 +14,7 @@
 .word span::after {
     content: '';
     width: 6px;
-    height: 90%;
+    height: 80%;
     background: white;
     display: block;
     position: absolute;
