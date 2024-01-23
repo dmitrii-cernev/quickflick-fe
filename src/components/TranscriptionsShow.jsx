@@ -9,13 +9,13 @@ export class TranscriptionsShow extends Component {
             {this.props.transcriptionsRetrieved && this.props.transcriptions.length > 0 && (
                 <div>
                     {/* Render TranscriptionsList on small screens */}
-                    <div className="sm:hidden">
+                    <div className="md:hidden">
                         <TranscriptionsList
                             transcriptions={handleTranscription(this.props.transcriptions)}/>
                     </div>
 
                     {/* Render TranscriptionsTable on medium and larger screens */}
-                    <div className="hidden sm:block">
+                    <div className="hidden md:block">
                         <TranscriptionsTable
                             transcriptions={handleTranscription(this.props.transcriptions)}/>
                     </div>
