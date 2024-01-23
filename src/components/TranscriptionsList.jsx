@@ -5,7 +5,7 @@ const TranscriptionsList = ({transcriptions}) => {
     // Initialize an array of states, one for each video
     const [activeVideos, setActiveVideos] = useState(Array(transcriptions.length).fill(false));
     const [currentTranscription, setCurrentTranscription] = useState("");
-    const [transcriptionModel, setTranscriptionModel] = useState(false);
+    const [transcriptionModal, setTranscriptionModal] = useState(false);
     const [currentTitle, setCurrentTitle] = useState("");
 
     // Function to toggle the description for a specific video
@@ -37,46 +37,49 @@ const TranscriptionsList = ({transcriptions}) => {
     }
 
     return (
-        <ul className="mt-4 space-y-1 animate-fade-right animate-duration-500">
-            {transcriptions.map((video, index) => (
-                <li key={video.subId}
-                    className="bg-white p-4 rounded-xl shadow-lg max-w-md mx-auto">
-                    <div
-                        className="flex items-center justify-between cursor-pointer"
-                        onClick={() => toggleDescription(index)}
-                    >
-                        <a
-                            href={video.videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="max-w-xs text-blue-500 hover:underline"
+        <div className={""}>
+            {TranscriptionModal(transcriptionModal, setTranscriptionModal, currentTranscription, currentTitle)}
+            <ul className="mt-4 space-y-1 animate-fade-right animate-duration-500">
+                {transcriptions.map((video, index) => (
+                    <li key={video.subId}
+                        className="bg-white p-4 rounded-xl shadow-lg max-w-md mx-auto">
+                        <div
+                            className="flex items-center justify-between cursor-pointer"
+                            onClick={() => toggleDescription(index)}
                         >
-                            {video.title}
-                        </a>
-                        {getArrow(index)}
-                    </div>
-                    {activeVideos[index] && (
-                        <div>
-                            <p className="text-gray-600 mt-2 overflow-hidden">
-                                {video.summary}
-                            </p>
-                            <hr className="my-2"/>
-                            {TranscriptionModal(transcriptionModel, setTranscriptionModel, currentTranscription, currentTitle)}
-                            <button
-                                className="text-blue-500 text-center hover:underline"
-                                onClick={() => {
-                                    setCurrentTranscription(video.transcription);
-                                    setCurrentTitle(video.title);
-                                    setTranscriptionModel(true);
-                                }}
+                            <a
+                                href={video.videoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="max-w-xs text-blue-500 hover:underline"
                             >
-                                Show transcription
-                            </button>
+                                {video.title}
+                            </a>
+                            {getArrow(index)}
                         </div>
-                    )}
-                </li>
-            ))}
-        </ul>
+                        {activeVideos[index] && (
+                            <div>
+                                <p className="text-gray-600 mt-2 overflow-hidden">
+                                    {video.summary}
+                                </p>
+                                <hr className="my-2"/>
+
+                                <button
+                                    className="text-blue-500 text-center hover:underline"
+                                    onClick={() => {
+                                        setCurrentTranscription(video.transcription);
+                                        setCurrentTitle(video.title);
+                                        setTranscriptionModal(true);
+                                    }}
+                                >
+                                    Show transcription
+                                </button>
+                            </div>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 

@@ -18,7 +18,10 @@ export default function TranscriptionModal(transcriptionModal, setTranscriptionM
                         <button
                             onClick={() => {
                                 navigator.clipboard.writeText(currentTranscription).then(() => console.log("Copied to clipboard"));
-                                toast.info("Copied to clipboard")
+                                toast.info("Copied to clipboard", {
+                                    autoClose: 1000,
+                                    hideProgressBar: true,
+                                })
                             }}
                             className="text-lg bg-white text-gray-300 hover:text-gray-600 transition"
                         >
