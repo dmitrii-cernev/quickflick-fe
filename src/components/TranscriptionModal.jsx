@@ -30,10 +30,7 @@ export default function TranscriptionModal(transcriptionModal, setTranscriptionM
         </Modal.Header>
 
         <Modal.Body>
-            <div className="overflow-y-auto h-96">
-
-                {currentTranscription}
-            </div>
+            {currentTranscription}
         </Modal.Body>
 
     </Modal>;
