@@ -11,7 +11,7 @@ export default function TranscriptionModal(transcriptionModal, setTranscriptionM
         popup
     >
         <Modal.Header className={""}>
-            <div className={"w-full flex gap-x-2 justify-between"}>
+            <div className={"p-2 w-full flex gap-x-2 justify-between"}>
                 <span className={""}>{title}</span>
                 <div className={""}>
                     <Tooltip content={"Copy transcription"} style={"light"} animation={"delay-700"}>

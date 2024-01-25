@@ -171,7 +171,7 @@ export default function Hero() {
 
     return (
         <div
-            className={"scale-[.77] xs:scale-100 text-left p-4 py-6 sm:p-10 min-h-screen flex items-center justify-center max-w-full"}>
+            className={"scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-screen flex items-center justify-center max-w-full"}>
             <div className={"flex flex-col items-center justify-center max-w-full"}>
                 <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
                     short videos from <b

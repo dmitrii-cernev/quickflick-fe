@@ -86,7 +86,7 @@ const LoginPage = () => {
                     onClick={handleLogin}
                     disabled={!isFormValid()}
                     gradientDuoTone="purpleToPink"
-                    className={` sm:w-3/12 font-semibold bg-gradient-to-r from-blue-300 to-pink-400 ${isFormValid() ? 'text-white hover:from-blue-300 hover:to-pink-600 focus:outline-none' : 'text-gray-700 cursor-not-allowed opacity-50'} p-2 transition-all`}
+                    className={` sm:w-3/12 font-semibold bg-gradient-to-r from-blue-300 to-pink-400 ${isFormValid() ? 'text-white hover:from-blue-300 hover:to-pink-600 focus:outline-none' : 'text-gray-700 cursor-not-allowed opacity-50'}  transition-all`}
                 >
                     Login
                 </Button>

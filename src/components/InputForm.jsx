@@ -12,7 +12,7 @@ export default function InputForm(props) {
             onChange={props.onChange}
         />
         <button
-            className={"flex-initial w-32 bg-gradient-to-r from-blue-300 to-pink-400 text-white py-4 px-4 sm:px-8 rounded-r-full " +
+            className={"flex-initial w-32 bg-gradient-to-r from-blue-300 to-pink-400 text-xl text-white py-4 px-4 sm:px-8 rounded-r-full " +
                 "hover:from-blue-300 hover:to-pink-600 focus:outline-none " +
                 `${props.disabled ? "active:scale-[.96] " : ""}` +
                 "transition-transform duration-100 ease-in-out focus:ring-2 focus:ring-violet-400 " +
@@ -22,7 +22,7 @@ export default function InputForm(props) {
             type={"button"}
             disabled={!props.disabled}
             onClick={props.onClick}
-        >Send!
+        >Go!
         </button>
     </form>;
 }
