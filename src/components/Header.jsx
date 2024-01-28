@@ -18,8 +18,8 @@ export default function Header() {
     return (<Navbar fluid
                     className={"top-0 fixed w-full shadow-lg p-2 sm:p-3.5 md:px-12 xl:px-24 3xl:px-44 z-20 bg-opacity-95 backdrop-blur-[2px] transition-all"}>
         <NavbarBrand href={"/"}>
-            <img src={logo} alt="MiniMemo" className="h-7 sm:h-10 mr-1 sm:mr-3"/>
-            <h1 className="text-[1.35rem] sm:text-[1.7rem] font-semibold text-gray-800">MiniMemo</h1>
+            <img src={logo} alt="Minimemo" className="h-7 sm:h-10 mr-1 sm:mr-3"/>
+            <h1 className="text-[1.35rem] sm:text-[1.7rem] font-semibold text-gray-800">Minimemo</h1>
         </NavbarBrand>
         {SignUpButton()}
         <NavbarCollapse className={"transition-all"}>
