@@ -21,7 +21,7 @@ export default function App() {
         dark: "bg-white-500 font-gray-100",
     }
     return (
-        <main className="text-center pt-16 sm:pt-20">
+        <main className="text-center pt-14 sm:pt-18">
             <Header/>
             <ToastContainer limit={3}
                             toastClassName={({type}) => contextClass[type || "default"] + " rounded-2xl m-2 p-2 text-gray-800 border-solid border-black relative flex p-1 min-h-10 justify-between overflow-hidden cursor-pointer"}/>

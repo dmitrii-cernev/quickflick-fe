@@ -3,7 +3,8 @@ import {FaLinkedin} from "react-icons/fa";
 
 export default function FooterWithLogo() {
     return (
-        <Footer className={"p-6 bg-opacity-30 rounded-none bottom-0"}>
+        <div className={"main-gradient"}>
+            <Footer className={"bg-white bg-opacity-30 p-6  rounded-none bottom-0"}>
             <div className={"w-full text-center flex items-center justify-center gap-4 px-8"}>
                 <FooterCopyright href="#" by="Minimemo™" year={2024}/>
                 <Footer.Icon icon={FaLinkedin}
@@ -11,6 +12,5 @@ export default function FooterWithLogo() {
                              target={"_blank"}
                 />
             </div>
-        </Footer>
-    );
+            </Footer></div>);
 }

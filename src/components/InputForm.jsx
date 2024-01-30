@@ -6,7 +6,7 @@ export default function InputForm(props) {
         <input
             className={"flex-1 py-4 sm:px-4 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 "}
             type={"text"}
-            placeholder={"https://www.tiktok.com/@weevelanguages/video/7296481599242243361?_t=8h7MLbMVA7Z&_r=1"}
+            placeholder={"Paste your TikTok/Reels/Shorts video link here!"}
             name={"link"}
             value={props.value}
             onChange={props.onChange}

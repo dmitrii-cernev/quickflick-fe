@@ -10,6 +10,10 @@ import axios from "axios";
 import {notifyDefaultError} from "../util/toast_util.jsx";
 import {toast} from "react-toastify";
 import CountShow from "./CountShow.jsx";
+import BenefitsSection from "./BenefitsSection.jsx";
+import {CommonQuestions} from "./CommonQuestions.jsx";
+import {YoutubeDemo} from "./YoutubeDemo.jsx";
+import PricingTable from "./PricingTable.jsx";
 
 export default function Hero() {
     const [link, setLink] = useState("")
@@ -74,7 +78,6 @@ export default function Hero() {
     }
 
     function notifyExceededLimit() {
-        // toast.warning("You have reached the maximum number of calls. Upgrade your plan to continue using the service.")
         toast.warning(<div>
             You have reached the maximum number of calls.
             {isLogged() ? " Upgrade your plan to continue using the service." : ""}
@@ -170,34 +173,45 @@ export default function Hero() {
     }, [ip, transcriptionsRetrieved]);
 
     return (
-        <div
-            className={"scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-screen flex items-center justify-center max-w-full"}>
-            <div className={"flex flex-col items-center justify-center max-w-full"}>
-                <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>Summarize
-                    short videos from <b
+        <div>
+            <div
+                className={"main-gradient scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-[85vh] flex items-center justify-center max-w-full"}>
+                <div className={"flex flex-col items-center justify-center max-w-full"}>
+                    <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>
+                        Summarize videos from <b
                         className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
-                </h1>
+                    </h1>
 
-                <InputForm value={link} onChange={handleInputChange}
-                           disabled={isValidLink && !isLoading}
-                           onClick={sendRequest}/>
+                    <InputForm value={link} onChange={handleInputChange}
+                               disabled={isValidLink && !isLoading}
+                               onClick={sendRequest}/>
 
-                <CountShow count={count}/>
+                    <CountShow count={count}/>
 
-                {isLoading && <ProgressBarDemo/>}
+                    {isLoading && <ProgressBarDemo/>}
 
-                {link && !isValidLink && (
-                    <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter a
-                        valid TikTok,
-                        Instagram
-                        or Youtube Shorts link.</p>)}
+                    {link && !isValidLink && (
+                        <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter
+                            a
+                            valid TikTok,
+                            Instagram
+                            or Youtube Shorts link.</p>)}
 
-                {apiResponse.title && (
-                    <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
-                                  showTranscription={showTranscription}/>
-                )}
-                <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved}
-                                    transcriptions={transcriptions}/>
+                    {apiResponse.title && (
+                        <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
+                                      showTranscription={showTranscription}/>
+                    )}
+                    <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved}
+                                        transcriptions={transcriptions}/>
+                </div>
             </div>
-        </div>)
+            <BenefitsSection/>
+            <CommonQuestions/>
+            <YoutubeDemo/>
+            <div className={"main-gradient"}>
+                <h1 className={"text-center text-5xl font-semibold text-white pt-10"}>Pricing</h1>
+                <PricingTable/>
+            </div>
+        </div>
+    )
 }
