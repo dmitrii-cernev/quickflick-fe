@@ -11,7 +11,7 @@ export function CommonQuestions() {
     }
 
     return (
-        <div className={"main-gradient mx-auto min-h-[80vh] p-4"}>
+        <div className={"main-gradient mx-auto min-h-[85vh] p-4"}>
             <h1 className={"text-white text-5xl font-semibold p-8"}>Common Questions</h1>
             <Accordion className={"bg-white bg-opacity-80 md:w-1/2 mx-auto"}>
                 {AccordionPanel("What is Minimemo?", "Minimemo is a SaaS (Software as a Service) product that allows users to save, summarize, and transcribe videos from various platforms such as TikTok, Reels, and Shorts. It simplifies the process of capturing key information from videos and organizing them in one place.")}

@@ -1,6 +1,6 @@
 export default function About() {
     return (
-        <div className={"main-gradient p-8"}>
+        <div className={"main-gradient py-2 sm:p-8"}>
             <div
                 className="w-11/12 mx-auto container text-left min-h-screen bg-white bg-opacity-40 p-8 sm:p-20 rounded-xl animate-fade animate-duration-200">
                 <h1 className="text-4xl font-bold mb-4">About Us</h1>

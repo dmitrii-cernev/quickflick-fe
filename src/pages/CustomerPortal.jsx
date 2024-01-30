@@ -66,7 +66,7 @@ export default function CustomerPortal() {
 
 
     return (
-        <div className={"h-screen"}>
+        <div className={"h-screen main-gradient p-8"}>
             <div
                 className={"h-auto flex items-center justify-center bg-white bg-opacity-40 p-4 md:w-1/2 mx-auto rounded-2xl"}>
                 <Tabs>

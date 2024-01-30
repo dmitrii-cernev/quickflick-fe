@@ -172,10 +172,22 @@ export default function Hero() {
 
     }, [ip, transcriptionsRetrieved]);
 
+    function DescribeSection() {
+        return <>
+            <BenefitsSection/>
+            <CommonQuestions/>
+            <YoutubeDemo/>
+            <div className={"main-gradient"}>
+                <h1 className={"text-center text-5xl font-semibold text-white pt-10 pb-4"}>Pricing</h1>
+                <PricingTable/>
+            </div>
+        </>;
+    }
+
     return (
         <div>
             <div
-                className={"main-gradient scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-[85vh] flex items-center justify-center max-w-full"}>
+                className={"main-gradient scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-[88vh] sm:min-h-[85vh] flex items-center justify-center max-w-full"}>
                 <div className={"flex flex-col items-center justify-center max-w-full"}>
                     <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>
                         Summarize videos from <b
@@ -205,13 +217,7 @@ export default function Hero() {
                                         transcriptions={transcriptions}/>
                 </div>
             </div>
-            <BenefitsSection/>
-            <CommonQuestions/>
-            <YoutubeDemo/>
-            <div className={"main-gradient"}>
-                <h1 className={"text-center text-5xl font-semibold text-white pt-10"}>Pricing</h1>
-                <PricingTable/>
-            </div>
+            {!isLogged() && DescribeSection()}
         </div>
     )
 }

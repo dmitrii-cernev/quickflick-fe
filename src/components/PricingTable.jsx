@@ -1,5 +1,5 @@
 export default function PricingTable() {
-    return <div className={"p-8 h-screen max-w-7xl mx-auto "}>
+    return <div className={"sm:p-4 h-screen max-w-7xl mx-auto "}>
             <span
                 className={"my-4"}><b>Note</b>: use the same email you provided during registration.</span>
         <stripe-pricing-table pricing-table-id="prctbl_1OZFokBq28w2VvMb1xdOkH1r"

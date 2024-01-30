@@ -17,7 +17,7 @@ function Item(props) {
 export default function BenefitsSection() {
     return (
         <div className={"main-gradient"}>
-            <div className={"bg-white bg-opacity-50 w-full p-8 px-14"}>
+            <div className={"bg-white bg-opacity-50 w-full p-8 sm:px-14"}>
                 <div className={"flex justify-between items-center flex-wrap gap-4"}>
                     <Item title={"Save time"}
                           description={"Minimemo will generate title, description, and tags for your videos in seconds. No more manual work. Just upload your video and get your summary."}
