@@ -6,7 +6,7 @@ export default function FooterWithLogo() {
         return <a
             href="https://www.producthunt.com/posts/minimemo?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-minimemo"
             target="_blank" rel="noopener noreferrer"
-            className={""}
+            className={"mx-auto w-44 pt-2 sm:w-fit sm:p-0"}
         >
             <img
                 src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=437326&theme=neutral"
@@ -18,7 +18,8 @@ export default function FooterWithLogo() {
     return (
         <div className={"main-gradient"}>
             <Footer className={"bg-white bg-opacity-30 p-6 rounded-none bottom-0"}>
-                <div className={"flex justify-between items-center mx-auto w-full sm:px-20"}>
+                <div
+                    className={"flex justify-between items-center flex-wrap sm:flex-nowrap mx-auto w-full sm:px-20"}>
                     <div className={"sm:w-60"}></div>
                     <div
                         className={"w-full text-center flex items-center justify-center gap-4 "}>
