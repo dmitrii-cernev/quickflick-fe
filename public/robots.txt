@@ -8,5 +8,4 @@ Disallow: /static/
 Disallow: /images/
 Disallow: /scripts/
 Disallow: /styles/
-Disallow: /assets/
 Disallow: /admin/
