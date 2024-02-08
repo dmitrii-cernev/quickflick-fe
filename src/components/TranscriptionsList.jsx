@@ -36,6 +36,28 @@ const TranscriptionsList = ({transcriptions}) => {
             </span>;
     }
 
+    function tagsShow(video) {
+        return (
+            <div className={"my-1"}>
+                <b className={"font-semibold"}>
+                    Tags: {video.tags}
+                </b>
+            </div>);
+    }
+
+    function showTranscription(video) {
+        return <button
+            className="text-blue-500 text-center hover:underline"
+            onClick={() => {
+                setCurrentTranscription(video.transcription);
+                setCurrentTitle(video.title);
+                setTranscriptionModal(true);
+            }}
+        >
+            Show transcription
+        </button>;
+    }
+
     return (
         <div className={""}>
             {TranscriptionModal(transcriptionModal, setTranscriptionModal, currentTranscription, currentTitle)}
@@ -59,21 +81,13 @@ const TranscriptionsList = ({transcriptions}) => {
                         </div>
                         {activeVideos[index] && (
                             <div>
-                                <p className="text-gray-600 mt-2 overflow-hidden">
+                                {video.tags && tagsShow(video)}
+                                <p className="text-gray-600 overflow-hidden">
                                     {video.summary}
                                 </p>
                                 <hr className="my-2"/>
 
-                                <button
-                                    className="text-blue-500 text-center hover:underline"
-                                    onClick={() => {
-                                        setCurrentTranscription(video.transcription);
-                                        setCurrentTitle(video.title);
-                                        setTranscriptionModal(true);
-                                    }}
-                                >
-                                    Show transcription
-                                </button>
+                                {video.transcription && showTranscription(video)}
                             </div>
                         )}
                     </li>

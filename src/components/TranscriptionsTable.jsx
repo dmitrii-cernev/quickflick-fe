@@ -45,11 +45,12 @@ const TranscriptionsTable = ({transcriptions}) => {
             className={"m-4 rounded-xl overflow-hidden shadow-md animate-fade-up animate-duration-700"}>
             {TranscriptionModal(transcriptionModal, setTranscriptionModal, currentTranscription, currentTitle)}
             <table
-                className="min-w-full max-w-md md:max-w-full border border-gray-300 divide-y divide-gray-300">
+                className="transition-all ease-in-out duration-200 min-w-full max-w-md md:max-w-full border border-gray-300 divide-y divide-gray-300">
                 <thead>
                 <tr>
                     {tableHeader("Title")}
                     {tableHeader("Platform")}
+                    {tableHeader("Tags")}
                     {tableHeader("Description")}
                     {tableHeader("Video URL")}
                     {tableHeader("Transcription")}
@@ -60,6 +61,7 @@ const TranscriptionsTable = ({transcriptions}) => {
                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                         {getTd(item.title)}
                         {getTd(item.platform)}
+                        {getTd(item.tags)}
                         {getTd(item.summary)}
                         {getTd(tableLink(item))}
                         {getTd(showTranscription(item))}

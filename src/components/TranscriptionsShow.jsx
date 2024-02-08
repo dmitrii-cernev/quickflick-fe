@@ -5,22 +5,28 @@ import * as PropTypes from "prop-types";
 
 export class TranscriptionsShow extends Component {
     render() {
+        const ListView = <div className={this.props.isLogged && "md:hidden"}>
+            <TranscriptionsList
+                transcriptions={handleTranscription(this.props.transcriptions)}/>
+        </div>;
+        const TableView = <div className="hidden md:block">
+            <TranscriptionsTable
+                transcriptions={handleTranscription(this.props.transcriptions)}/>
+        </div>;
+
         return <div className={"w-full"}>
-            {this.props.transcriptionsRetrieved && this.props.transcriptions.length > 0 && (
+            {this.props.isLogged && this.props.isTranscriptionsRetrieved && this.props.transcriptions.length === 0 && (
+                <div className={"text-center"}>
+                    <h3 className={"text-xl font-semibold text-white"}>No result</h3>
+                </div>)}
+            {this.props.isLogged && this.props.isTranscriptionsRetrieved && this.props.transcriptions.length > 0 && (
                 <div>
                     {/* Render TranscriptionsList on small screens */}
-                    <div className="md:hidden">
-                        <TranscriptionsList
-                            transcriptions={handleTranscription(this.props.transcriptions)}/>
-                    </div>
-
+                    {ListView}
                     {/* Render TranscriptionsTable on medium and larger screens */}
-                    <div className="hidden md:block">
-                        <TranscriptionsTable
-                            transcriptions={handleTranscription(this.props.transcriptions)}/>
-                    </div>
-                </div>
-            )}
+                    {TableView}
+                </div>)}
+            {!this.props.isLogged && this.props.isTranscriptionsRetrieved && this.props.transcriptions.length > 0 && ListView}
         </div>;
     }
 }
@@ -51,6 +57,7 @@ const handleTranscription = (transcriptions) => {
 };
 
 TranscriptionsShow.propTypes = {
-    transcriptionsRetrieved: PropTypes.bool,
-    transcriptions: PropTypes.arrayOf(PropTypes.any)
+    isTranscriptionsRetrieved: PropTypes.bool,
+    transcriptions: PropTypes.arrayOf(PropTypes.any),
+    isLogged: PropTypes.bool,
 };

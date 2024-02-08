@@ -6,7 +6,7 @@ export default function InputForm(props) {
         <input
             className={"flex-1 py-4 sm:px-4 border border-gray-300 rounded-l-full focus:outline-none focus:border-blue-500 "}
             type={"text"}
-            placeholder={"Paste your TikTok/Reels/Shorts video link here!"}
+            placeholder={(props.isLogged ? "" : "Try me! ") + "Paste your TikTok/Reels/Shorts video link here!"}
             name={"link"}
             value={props.value}
             onChange={props.onChange}
@@ -31,5 +31,6 @@ InputForm.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    isLogged: PropTypes.bool
 };

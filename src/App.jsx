@@ -1,4 +1,4 @@
-import Hero from "./components/Hero.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 import FooterWithLogo from "./components/FooterWithLogo.jsx";
 import Header from "./components/Header.jsx";
 import {ToastContainer} from "react-toastify";
@@ -26,7 +26,7 @@ export default function App() {
             <ToastContainer limit={3}
                             toastClassName={({type}) => contextClass[type || "default"] + " rounded-2xl m-2 p-2 text-gray-800 border-solid border-black relative flex p-1 min-h-10 justify-between overflow-hidden cursor-pointer"}/>
             <Routes>
-                <Route path="/" element={<Hero/>}/>
+                <Route path="/" element={<LandingPage/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/api" element={<ApiPage/>}/>
                 <Route path="/pricing" element={<PricingPage/>}/>

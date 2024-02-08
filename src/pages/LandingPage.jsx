@@ -1,21 +1,32 @@
 import '../App.css'
 import {useEffect, useState} from "react";
 import {useTypingText} from "../hooks/useTypingText.jsx";
-import InputForm from "./InputForm.jsx";
-import ResponseShow from "./ResponseShow.jsx";
-import {TranscriptionsShow} from "./TranscriptionsShow.jsx";
-import ProgressBarDemo from "./ProgressBarDemo.jsx";
+import InputForm from "../components/InputForm.jsx";
+import ResponseShow from "../components/ResponseShow.jsx";
+import {TranscriptionsShow} from "../components/TranscriptionsShow.jsx";
+import ProgressBarDemo from "../components/ProgressBarDemo.jsx";
 import {isLogged, request} from "../util/axios_util.jsx";
 import axios from "axios";
 import {notifyDefaultError} from "../util/toast_util.jsx";
 import {toast} from "react-toastify";
-import CountShow from "./CountShow.jsx";
-import BenefitsSection from "./BenefitsSection.jsx";
-import {CommonQuestions} from "./CommonQuestions.jsx";
-import {YoutubeDemo} from "./YoutubeDemo.jsx";
-import PricingTable from "./PricingTable.jsx";
+import CountShow from "../components/CountShow.jsx";
+import BenefitsSection from "../components/BenefitsSection.jsx";
+import {CommonQuestions} from "../components/CommonQuestions.jsx";
+import {YoutubeDemo} from "../components/YoutubeDemo.jsx";
+import PricingTable from "../components/PricingTable.jsx";
+import {SearchVideo} from "./SearchVideo.jsx";
 
-export default function Hero() {
+import image from "../media/image2.webp";
+
+function LandingImage() {
+    return (
+        <div className={"scale-75"}>
+            <img src={image} alt={"landing-image"} className={"rounded-3xl shadow-md"}/>
+        </div>
+    );
+}
+
+export default function LandingPage() {
     const [link, setLink] = useState("")
     const [isValidLink, setIsValidLink] = useState(false);
     const [apiResponse, setApiResponse] = useState({
@@ -24,12 +35,13 @@ export default function Hero() {
     const [isLoading, setIsLoading] = useState(false)
     const [showTranscription, setShowTranscription] = useState(false);
     const [transcriptions, setTranscriptions] = useState([]);
-    const [transcriptionsRetrieved, setTranscriptionsRetrieved] = useState(false);
+    const [isRetrieved, setIsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
     const [count, setCount] = useState({
         totalCount: 3,
         count: 3
     });
+    const [search, setSearch] = useState("");
 
     function handleInputChange(event) {
         const value = event.target.value
@@ -40,6 +52,34 @@ export default function Hero() {
         const youtubePattern = /^(https?:\/\/)?(www\.)?youtube\.com\/shorts\/[a-zA-Z0-9_-]+(\?.*)?$/;
         const isValidLink = tiktokShortPattern.test(value) || instagramPattern.test(value) || tiktokLongPattern.test(value) || youtubePattern.test(value);
         setIsValidLink(isValidLink);
+    }
+
+    function handleSearchChange(event) {
+        const value = event.target.value
+        setSearch(value)
+        if (value.length >= 3) {
+            request('GET', `api/auth/video/search?query=${value}`, {})
+                .then(response => {
+                    console.log('fetching search')
+                    setTranscriptions(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    notifyDefaultError()
+                });
+        }
+
+        if (value.length === 0) {
+            request('GET', `api/auth/videos`, {})
+                .then(response => {
+                    console.log('fetching all')
+                    setTranscriptions(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    notifyDefaultError()
+                });
+        }
     }
 
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -97,6 +137,7 @@ export default function Hero() {
 
     const sendRequest = async () => {
         try {
+            setLink('')
             setIsLoading(true)
             await decrementCount()
             setApiResponse({title: "", summary: "", transcription: ""})
@@ -116,6 +157,7 @@ export default function Hero() {
             }
             setIsLoading(false)
             await incrementCount()
+            setLink(link)
         }
     };
 
@@ -154,10 +196,11 @@ export default function Hero() {
                     getCountUrl = `api/open/subscription/count/${ipAddress}`
                 }
 
-                if (!transcriptionsRetrieved) {
+                if (!isRetrieved) {
                     const response = await request('GET', getVideosUrl, {})
                     setTranscriptions(response.data);
-                    setTranscriptionsRetrieved(true);
+                    console.log(response.data)
+                    setIsRetrieved(true);
                 }
                 const countResponse = await request('GET', getCountUrl, {})
                 setCount(countResponse.data);
@@ -166,11 +209,11 @@ export default function Hero() {
             }
         };
 
-        if (!ip && !transcriptionsRetrieved) {
+        if (!ip && !isRetrieved) {
             fetchData().then(() => console.log("Fetched data"));
         }
 
-    }, [ip, transcriptionsRetrieved]);
+    }, [ip, isRetrieved]);
 
     function DescribeSection() {
         return <>
@@ -178,44 +221,70 @@ export default function Hero() {
             <CommonQuestions/>
             <YoutubeDemo/>
             <div className={"main-gradient"}>
-                <h1 className={"text-center text-5xl font-semibold text-white pt-10 pb-4"}>Pricing</h1>
+                <h2 className={"text-center text-5xl font-semibold text-white pt-10 pb-4"}>Pricing</h2>
                 <PricingTable/>
             </div>
         </>;
     }
 
+    function Hero() {
+        return <div className={"flex flex-col items-center justify-center"}>
+            <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4 gap-y-1 mb-2"}>
+                Best way to organize informative content from
+                <b className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
+            </h1>
+
+            {!isLogged() && <h2
+                className={"animate-fade-down animate-duration-700 text-white text-left text-2xl my-8"}>
+                We bring your videos together: from any platform to one library, just by sharing a
+                link.
+                Leave the details to AI: it will automatically generate titles, tags, and summaries
+                for
+                you.
+            </h2>}
+
+            <InputForm value={link} onChange={handleInputChange}
+                       disabled={isValidLink && !isLoading}
+                       onClick={sendRequest}
+                       isLogged={isLogged()}/>
+
+            <CountShow count={count}/>
+
+            {isLoading && <ProgressBarDemo/>}
+
+            {link && !isValidLink && (
+                <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter
+                    a
+                    valid TikTok,
+                    Instagram
+                    or Youtube Shorts link.</p>)}
+
+            {apiResponse.title && (
+                <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
+                              showTranscription={showTranscription}/>
+            )}
+            {isLogged() && <SearchVideo value={search} onChange={handleSearchChange}/>}
+            <TranscriptionsShow isTranscriptionsRetrieved={isRetrieved}
+                                transcriptions={transcriptions}
+                                isLogged={isLogged()}
+            />
+        </div>;
+    }
+
     return (
         <div>
             <div
-                className={"main-gradient scale-[.77] xs:scale-100 text-left p-4 sm:p-10 min-h-[88vh] sm:min-h-[85vh] flex items-center justify-center max-w-full"}>
-                <div className={"flex flex-col items-center justify-center max-w-full"}>
-                    <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4"}>
-                        Summarize videos from <b
-                        className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
-                    </h1>
-
-                    <InputForm value={link} onChange={handleInputChange}
-                               disabled={isValidLink && !isLoading}
-                               onClick={sendRequest}/>
-
-                    <CountShow count={count}/>
-
-                    {isLoading && <ProgressBarDemo/>}
-
-                    {link && !isValidLink && (
-                        <p className="bg-white text-red-500 w-6/12 mt-2 p-1 rounded-lg">Please enter
-                            a
-                            valid TikTok,
-                            Instagram
-                            or Youtube Shorts link.</p>)}
-
-                    {apiResponse.title && (
-                        <ResponseShow apiResponse={apiResponse} onClick={toggleTranscription}
-                                      showTranscription={showTranscription}/>
-                    )}
-                    <TranscriptionsShow transcriptionsRetrieved={transcriptionsRetrieved}
-                                        transcriptions={transcriptions}/>
-                </div>
+                className={"main-gradient scale-[.77] xs:scale-100 text-left p-6 sm:p-10 min-h-[88vh]  flex items-center justify-center max-w-full"}>
+                {isLogged() && Hero()}
+                {!isLogged() && <div
+                    className={"flex flex-row flex-wrap justify-center items-center w-full gap-x-6"}>
+                    <div className={"lg:w-[40vw] my-auto"}>
+                        {Hero()}
+                    </div>
+                    <div className={"lg:w-[50vw]"}>
+                        <LandingImage/>
+                    </div>
+                </div>}
             </div>
             {!isLogged() && DescribeSection()}
         </div>

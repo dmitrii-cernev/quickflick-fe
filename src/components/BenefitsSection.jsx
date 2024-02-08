@@ -20,19 +20,19 @@ export default function BenefitsSection() {
             <div className={"bg-white bg-opacity-40 w-full p-8 sm:px-14"}>
                 <div className={"flex justify-between items-center flex-wrap gap-4"}>
                     <Item title={"Save time"}
-                          description={"Minimemo will generate title, description, and tags for your videos in seconds. No more manual work. Just upload your video and get your summary."}
+                          description={"Boost your productivity by instantly generating video titles, descriptions, and tags with Minimemo, making content creation and organization effortless."}
                           icon={<MdOutlineAccessTime/>}
                     />
-                    <Item title={"All in one place"}
-                          description={"Keep all your useful videos from different platforms in one place. No more switching between platforms."}
+                    <Item title={"All In One Place"}
+                          description={"Simplify your digital life by storing all your favorite videos from TikTok, Instagram, YouTube Shorts, and more in one easy-to-access place with Minimemo."}
                           icon={<TbWorldHeart/>}
                     />
                     <Item title={"99 languages"}
                           description={"Minimemo supports 99 languages, including English, Spanish, French, German, Chinese, Japanese, Korean, and more."}
                           icon={<IoLanguageOutline/>}
                     />
-                    <Item title={"Powered by ChatGPT"}
-                          description={"We use ChatGPT to generate the summary of your videos. ChatGPT is a state-of-the-art language model that can generate human-like text."}
+                    <Item title={"Smart Summaries"}
+                          description={"We use ChatGPT to create quick, clear summaries from your videos, making them easy to follow."}
                           icon={<LuBrainCircuit/>}
                     />
 
