@@ -12,7 +12,6 @@ import {toast} from "react-toastify";
 import CountShow from "../components/CountShow.jsx";
 import BenefitsSection from "../components/BenefitsSection.jsx";
 import {CommonQuestions} from "../components/CommonQuestions.jsx";
-import {YoutubeDemo} from "../components/YoutubeDemo.jsx";
 import PricingTable from "../components/PricingTable.jsx";
 import {SearchVideo} from "./SearchVideo.jsx";
 
@@ -219,7 +218,7 @@ export default function LandingPage() {
         return <>
             <BenefitsSection/>
             <CommonQuestions/>
-            <YoutubeDemo/>
+            {/*<YoutubeDemo/>*/}
             <div className={"main-gradient"}>
                 <h2 className={"text-center text-5xl font-semibold text-white pt-10 pb-4 drop-shadow-md"}>Pricing</h2>
                 <PricingTable/>
@@ -271,7 +270,7 @@ export default function LandingPage() {
     return (
         <div>
             <div
-                className={"main-gradient scale-[.77] xs:scale-100 text-left p-6 sm:p-10 min-h-[88vh]  flex items-center justify-center max-w-full"}>
+                className={"main-gradient text-left p-6 sm:p-10 min-h-[88vh] flex items-center justify-center min-w-full"}>
                 {isLogged() && Hero()}
                 {!isLogged() && <div
                     className={"flex flex-row flex-wrap justify-center items-center w-full gap-x-6"}>
