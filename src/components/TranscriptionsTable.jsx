@@ -23,7 +23,7 @@ const TranscriptionsTable = ({transcriptions}) => {
             rel="noopener noreferrer"
             className="text-blue-500 hover:underline"
         >
-            View Video
+            {transcription.title}
         </a>;
     }
 
@@ -52,18 +52,16 @@ const TranscriptionsTable = ({transcriptions}) => {
                     {tableHeader("Platform")}
                     {tableHeader("Tags")}
                     {tableHeader("Description")}
-                    {tableHeader("Video URL")}
                     {tableHeader("Transcription")}
                 </tr>
                 </thead>
                 <tbody>
                 {transcriptions.map((item, index) => (
                     <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                        {getTd(item.title)}
+                        {getTd(tableLink(item))}
                         {getTd(item.platform)}
                         {getTd(item.tags)}
                         {getTd(item.summary)}
-                        {getTd(tableLink(item))}
                         {getTd(showTranscription(item))}
                     </tr>
                 ))}

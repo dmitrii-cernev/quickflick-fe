@@ -8,7 +8,7 @@ export default function Header() {
     function SignUpButton() {
         return <div className={"flex items-center md:order-2"}>
             {!isLogged() && <button
-                className="transition-all bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base md:text-xl font-semibold py-1 md:py-2 px-5 mr-4 md:mr-1 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none ">
+                className="transition-all bg-gradient-to-r from-blue-300 to-pink-400 text-white text-base md:text-xl font-semibold py-1 md:py-2 px-5 mr-4 md:mr-1 rounded-full items-center hover:from-blue-300 hover:to-pink-600 focus:outline-none drop-shadow-md ">
                 <Link to={"/login"}>Sign Up</Link>
             </button>}
             <NavbarToggle/>

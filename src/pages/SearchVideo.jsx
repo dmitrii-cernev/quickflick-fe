@@ -1,6 +1,7 @@
 export function SearchVideo(props) {
     return (
-        <div className="w-full sm:w-2/3 flex justify-center items-center">
+        <div
+            className="w-full sm:w-2/3 flex justify-center items-center drop-shadow-md animate-fade-up">
             <input
                 type="text"
                 placeholder="Search video"

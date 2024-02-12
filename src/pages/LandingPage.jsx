@@ -221,7 +221,7 @@ export default function LandingPage() {
             <CommonQuestions/>
             <YoutubeDemo/>
             <div className={"main-gradient"}>
-                <h2 className={"text-center text-5xl font-semibold text-white pt-10 pb-4"}>Pricing</h2>
+                <h2 className={"text-center text-5xl font-semibold text-white pt-10 pb-4 drop-shadow-md"}>Pricing</h2>
                 <PricingTable/>
             </div>
         </>;
@@ -229,18 +229,15 @@ export default function LandingPage() {
 
     function Hero() {
         return <div className={"flex flex-col items-center justify-center"}>
-            <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4 gap-y-1 mb-2"}>
+            <h1 className={"animate-fade-down animate-duration-700 flex flex-wrap text-5xl font-semibold text-white gap-x-4 gap-y-1 mb-2 drop-shadow-md"}>
                 Best way to organize informative content from
                 <b className="min-w-[250px] md:min-w-[280px]">{supportedServices.word}</b>
             </h1>
 
             {!isLogged() && <h2
-                className={"animate-fade-down animate-duration-700 text-white text-left text-2xl my-8"}>
-                We bring your videos together: from any platform to one library, just by sharing a
-                link.
-                Leave the details to AI: it will automatically generate titles, tags, and summaries
-                for
-                you.
+                className={"animate-fade-down animate-duration-700 text-white text-left text-2xl my-8 drop-shadow-md"}>
+                We bring your videos together: from any platform to one library and
+                generate summaries, tags, and titles for you.
             </h2>}
 
             <InputForm value={link} onChange={handleInputChange}
@@ -278,10 +275,10 @@ export default function LandingPage() {
                 {isLogged() && Hero()}
                 {!isLogged() && <div
                     className={"flex flex-row flex-wrap justify-center items-center w-full gap-x-6"}>
-                    <div className={"lg:w-[40vw] my-auto"}>
+                    <div className={"lg:w-[40vw] sm:my-auto"}>
                         {Hero()}
                     </div>
-                    <div className={"lg:w-[50vw]"}>
+                    <div className={"lg:w-[40vw]"}>
                         <LandingImage/>
                     </div>
                 </div>}

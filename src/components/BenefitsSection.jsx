@@ -6,7 +6,7 @@ import {LuBrainCircuit} from "react-icons/lu";
 function Item(props) {
     return (
         <div
-            className={"flex flex-col mx-auto items-center w-72 h-72 p-4 bg-white bg-opacity-50 rounded-xl"}>
+            className={"flex flex-col mx-auto items-center w-72 h-72 p-4 bg-white bg-opacity-50 rounded-xl drop-shadow-md"}>
             <span className={"text-6xl text-gray-800"}>{props.icon}</span>
             <h3 className={"text-2xl mb-1 text-gray-800 font-bold"}>{props.title}</h3>
             <p className={"text-lg text-gray-800 text-center"}>{props.description}</p>
