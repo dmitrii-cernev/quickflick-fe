@@ -1,5 +1,5 @@
 import {Footer, FooterCopyright} from "flowbite-react";
-import {FaLinkedin} from "react-icons/fa";
+import {FaLinkedin, FaYoutube} from "react-icons/fa";
 
 export default function FooterWithLogo() {
     return (
@@ -9,6 +9,10 @@ export default function FooterWithLogo() {
                     <FooterCopyright href="#" by="Minimemo™" year={2024}/>
                     <Footer.Icon icon={FaLinkedin}
                                  href={"https://www.linkedin.com/in/dmitrii-cernev-35a0a517b/"}
+                                 target={"_blank"}
+                    />
+                    <Footer.Icon icon={FaYoutube}
+                                 href={"https://youtube.com/@minimemoio?si=VuGFmmCINnVWP5Gc"}
                                  target={"_blank"}
                     />
                 </div>
