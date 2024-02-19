@@ -9,7 +9,7 @@ import {isLogged, request} from "../util/axios_util.jsx";
 import axios from "axios";
 import {notifyDefaultError} from "../util/toast_util.jsx";
 import {toast} from "react-toastify";
-import CountShow from "../components/CountShow.jsx";
+import DurationShow from "../components/DurationShow.jsx";
 import BenefitsSection from "../components/BenefitsSection.jsx";
 import {CommonQuestions} from "../components/CommonQuestions.jsx";
 import PricingTable from "../components/PricingTable.jsx";
@@ -36,9 +36,9 @@ export default function LandingPage() {
     const [transcriptions, setTranscriptions] = useState([]);
     const [isRetrieved, setIsRetrieved] = useState(false);
     const [ip, setIP] = useState("")
-    const [count, setCount] = useState({
-        totalCount: 3,
-        count: 3
+    const [duration, setDuration] = useState({
+        totalDuration: 5,
+        duration: 5
     });
     const [search, setSearch] = useState("");
 
@@ -101,21 +101,6 @@ export default function LandingPage() {
         }
     }
 
-    async function decrementCount() {
-        if (count.count > 0) {
-            const newCount = count.count - 1;
-            setCount({...count, count: newCount})
-        }
-    }
-
-    async function incrementCount() {
-        //idk why it works
-        if (count.count < count.totalCount) {
-            const newCount = count.count;
-            setCount({...count, count: newCount})
-        }
-    }
-
     function notifyExceededLimit() {
         toast.warning(<div>
             You have reached the maximum number of calls.
@@ -138,7 +123,6 @@ export default function LandingPage() {
         try {
             setLink('')
             setIsLoading(true)
-            await decrementCount()
             setApiResponse({title: "", summary: "", transcription: ""})
             const encodedLink = encodeURIComponent(link)
             const url = isLogged() ? `/api/auth/process?url=${encodedLink}` : `/api/open/process?url=${encodedLink}&userId=${ip}`;
@@ -155,7 +139,6 @@ export default function LandingPage() {
                 notifyDefaultError()
             }
             setIsLoading(false)
-            await incrementCount()
             setLink(link)
         }
     };
@@ -185,14 +168,14 @@ export default function LandingPage() {
         const fetchData = async () => {
             try {
                 let getVideosUrl;
-                let getCountUrl;
+                let getDurationUrl;
                 if (isLogged()) {
                     getVideosUrl = `api/auth/videos`
-                    getCountUrl = `api/subscription/count`
+                    getDurationUrl = `api/subscription/duration`
                 } else {
                     const ipAddress = await getIP();
                     getVideosUrl = `api/open/videos/${ipAddress}`
-                    getCountUrl = `api/open/subscription/count/${ipAddress}`
+                    getDurationUrl = `api/open/subscription/duration/${ipAddress}`
                 }
 
                 if (!isRetrieved) {
@@ -201,8 +184,8 @@ export default function LandingPage() {
                     console.log(response.data)
                     setIsRetrieved(true);
                 }
-                const countResponse = await request('GET', getCountUrl, {})
-                setCount(countResponse.data);
+                const durationResponse = await request('GET', getDurationUrl, {})
+                setDuration(durationResponse.data);
             } catch (error) {
                 console.error('An error occurred:', error);
             }
@@ -244,7 +227,7 @@ export default function LandingPage() {
                        onClick={sendRequest}
                        isLogged={isLogged()}/>
 
-            <CountShow count={count}/>
+            <DurationShow duration={duration}/>
 
             {isLoading && <ProgressBarDemo/>}
 
